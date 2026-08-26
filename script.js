@@ -183,21 +183,20 @@ function initFormHandler() {
         successMsg.classList.add('show');
       }
 
+      // Send via FormData for max FormSubmit compatibility
+      const fd = new FormData();
+      fd.append('Name', name);
+      fd.append('Phone', phoneDigits);
+      fd.append('Location', location);
+      fd.append('Service', service);
+      fd.append('Budget', budget || 'Not specified');
+      fd.append('Notes', notes || 'None');
+      fd.append('_subject', `New Livona Space Lead: ${name} (${service})`);
+
       fetch('https://formsubmit.co/ajax/ravi.bhargaw@meaven.in', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          Name: name,
-          Phone: phoneDigits,
-          Location: location,
-          Service: service,
-          Budget: budget || 'Not specified',
-          Notes: notes || 'None',
-          _subject: `New Livona Space Lead: ${name} (${service})`
-        })
+        headers: { 'Accept': 'application/json' },
+        body: fd
       }).catch(err => console.warn('Email dispatch:', err));
 
       const waText = encodeURIComponent(
@@ -219,16 +218,14 @@ function initFormHandler() {
 }
 
 /* --------------------------------------------------------------------------
-   6. LIVONA AI ASSISTANT (LOCAL TIME GREETING + MANDATORY NAME & PHONE STEP)
+   6. LIVONA AI ASSISTANT (ROBUST FORMDATA DISPATCH & WHATSAPP REDIRECT)
    -------------------------------------------------------------------------- */
 function initAiChatbot() {
-  // Determine local time greeting
   const hour = new Date().getHours();
   let timeGreeting = 'Good evening! 🌙';
   if (hour >= 5 && hour < 12) timeGreeting = 'Good morning! ☀️';
   else if (hour >= 12 && hour < 17) timeGreeting = 'Good afternoon! 🌤️';
 
-  // Inject Widget DOM
   const widgetContainer = document.createElement('div');
   widgetContainer.id = 'aiChatbotApp';
   widgetContainer.innerHTML = `
@@ -268,8 +265,7 @@ function initAiChatbot() {
 
   if (!launcher || !drawer || !closeBtn || !chatBody || !input || !sendBtn) return;
 
-  // Onboarding state tracking
-  let leadState = 'NEEDS_NAME'; // 'NEEDS_NAME' -> 'NEEDS_PHONE' -> 'UNLOCKED'
+  let leadState = 'NEEDS_NAME';
   let userLeadName = '';
   let userLeadPhone = '';
 
@@ -284,7 +280,6 @@ function initAiChatbot() {
     drawer.classList.remove('open');
   });
 
-  // Handle Quick Pills
   document.addEventListener('click', (e) => {
     if (e.target.classList.contains('ai-pill-btn')) {
       const query = e.target.getAttribute('data-query');
@@ -335,11 +330,11 @@ function initAiChatbot() {
       userLeadPhone = phoneDigits;
       leadState = 'UNLOCKED';
 
-      // 1. Dispatch lead to email & localStorage
+      // 1. Save lead to localStorage
       const enquiry = {
         name: userLeadName,
         phone: userLeadPhone,
-        source: 'AI Chatbot',
+        source: 'AI Assistant Chatbot',
         timestamp: new Date().toISOString()
       };
 
@@ -349,16 +344,18 @@ function initAiChatbot() {
         localStorage.setItem('livona_enquiries', JSON.stringify(existing));
       } catch (err) {}
 
+      // 2. Dispatch via FormData for maximum FormSubmit reliability
+      const fd = new FormData();
+      fd.append('Name', userLeadName);
+      fd.append('Phone', userLeadPhone);
+      fd.append('Source', 'AI Assistant Chatbot');
+      fd.append('_subject', `New AI Chatbot Lead: ${userLeadName} (${userLeadPhone})`);
+
       fetch('https://formsubmit.co/ajax/ravi.bhargaw@meaven.in', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          Name: userLeadName,
-          Phone: userLeadPhone,
-          Source: 'AI Assistant Chatbot',
-          _subject: `New AI Chatbot Lead: ${userLeadName} (${userLeadPhone})`
-        })
-      }).catch(() => {});
+        headers: { 'Accept': 'application/json' },
+        body: fd
+      }).catch(err => console.warn('Chatbot email error:', err));
 
       input.placeholder = 'Ask about pricing, timelines, or waterproofing...';
       input.type = 'text';
@@ -376,7 +373,6 @@ function initAiChatbot() {
       }, 400);
 
     } else {
-      // UNLOCKED STATE
       handleAiQuery(val, val);
       input.value = '';
     }
