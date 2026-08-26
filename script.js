@@ -183,7 +183,7 @@ function initFormHandler() {
         successMsg.classList.add('show');
       }
 
-      fetch('https://formsubmit.co/ajax/livona.space@gmail.com', {
+      fetch('https://formsubmit.co/ajax/ravi.bhargaw@meaven.in', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
