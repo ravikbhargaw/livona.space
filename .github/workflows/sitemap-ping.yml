@@ -1,0 +1,36 @@
+name: Daily Automated Search Engine Sitemap Ping
+
+on:
+  schedule:
+    # Run automatically every day at midnight UTC
+    - cron: '0 0 * * *'
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  ping-search-engines:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Google Sitemap Indexer
+        run: |
+          curl -s "https://www.google.com/ping?sitemap=https://livona.space/sitemap.xml" || true
+
+      - name: Ping IndexNow (Bing / Yandex / Seznam)
+        run: |
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "host": "livona.space",
+              "key": "livona-space-sitemap-index",
+              "keyLocation": "https://livona.space/sitemap.xml",
+              "urlList": [
+                "https://livona.space/",
+                "https://livona.space/interiors.html",
+                "https://livona.space/bathroom-renovation.html",
+                "https://livona.space/gallery.html",
+                "https://livona.space/blog.html",
+                "https://livona.space/about.html",
+                "https://livona.space/contact.html"
+              ]
+            }' || true
