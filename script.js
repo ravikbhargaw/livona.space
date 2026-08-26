@@ -322,19 +322,19 @@ function initAiChatbot() {
       • <strong>Signature Tier (Popular):</strong> ₹1,55,000 + GST<br>
       • <strong>Elite Tier:</strong> ₹2,05,000 + GST<br><br>
       All tiers include 7-10 day delivery, 3-layer waterproofing, and debris removal! <br><br>
-      <a href="https://calendar.app.google/v7t9guy8icVkbiW9A" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click here to Book a Free Bathroom Audit 📅</a>`;
+      <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click here to Book a Free Bathroom Audit 📅</a>`;
     } else if (q.includes('interior') || q.includes('fit-out') || q.includes('kitchen') || q.includes('2bhk') || q.includes('3bhk')) {
       reply = `<strong>Residential Interior Fit-Outs:</strong><br>
       • <strong>Standard Scope:</strong> ₹1,450 - ₹1,750 / sq.ft.<br>
       • <strong>Premium Scope:</strong> ₹1,850 - ₹2,250 / sq.ft.<br><br>
       Includes factory precision modular kitchens, floor-to-ceiling wardrobes, false ceiling, and 45-day guaranteed handover.<br><br>
-      <a href="https://calendar.app.google/v7t9guy8icVkbiW9A" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Schedule a Site Measurement on Google Calendar 📅</a>`;
+      <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Schedule a Site Measurement on Google Calendar 📅</a>`;
     } else if (q.includes('waterproof') || q.includes('leak') || q.includes('guarantee')) {
       reply = `<strong>100% Multi-Layer Waterproofing Guarantee:</strong><br>
       We use polymer-modified cementitious slurry + elastomeric membrane coating across wet areas and wall corners, backed by an official 5-year warranty against seepage.`;
     } else if (q.includes('book') || q.includes('meeting') || q.includes('visit') || q.includes('calendar')) {
       reply = `You can directly book a site visit on our Google Calendar:<br><br>
-      <a href="https://calendar.app.google/v7t9guy8icVkbiW9A" target="_blank" rel="noopener" style="background: var(--ink); color: #fff; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-block; font-size: 0.8rem; margin-top: 4px;">📅 Open Google Calendar Booking</a><br><br>
+      <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" style="background: var(--ink); color: #fff; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-block; font-size: 0.8rem; margin-top: 4px;">📅 Open Google Calendar Booking</a><br><br>
       Or call/WhatsApp us directly at <strong>+91 83174 93619</strong>!`;
     } else if (/\d{10}/.test(q)) {
       reply = `Thank you! We have logged your mobile number (<strong>${q}</strong>). A Livona Space project engineer will call or WhatsApp you within 2 hours!`;
@@ -342,7 +342,7 @@ function initAiChatbot() {
       reply = `Livona Space delivers fixed-scope residential interiors and 7-10 day bathroom renovations in Bangalore.<br><br>
       • Call/WhatsApp: <strong>+91 83174 93619</strong><br>
       • Email: <strong>livona.space@gmail.com</strong><br><br>
-      <a href="https://calendar.app.google/v7t9guy8icVkbiW9A" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click here to Book a Free Site Measurement 📅</a>`;
+      <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click here to Book a Free Site Measurement 📅</a>`;
     }
 
     setTimeout(() => {
