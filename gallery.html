@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Gallery — Livona Space Bangalore</title>
+  <meta name="description" content="Explore completed interior fit-outs and bathroom renovations by Livona Space across Bangalore.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- SHARED STICKY HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="brand-logo" aria-label="Livona Space Homepage">
+          Livona <span class="space-text">Space</span>
+        </a>
+
+        <nav aria-label="Main Navigation">
+          <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="interiors.html" class="nav-link">Interiors</a></li>
+            <li><a href="bathroom-renovation.html" class="nav-link">Bathroom Renovation</a></li>
+            <li><a href="gallery.html" class="nav-link active-nav">Gallery</a></li>
+            <li><a href="blog.html" class="nav-link">Blog</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <a href="contact.html" class="btn btn-dark">Get a Quote</a>
+          <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="interiors.html" class="mobile-nav-link">Interiors</a>
+    <a href="bathroom-renovation.html" class="mobile-nav-link">Bathroom Renovation</a>
+    <a href="gallery.html" class="mobile-nav-link active-nav">Gallery</a>
+    <a href="blog.html" class="mobile-nav-link">Blog</a>
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="contact.html" class="mobile-nav-link">Contact</a>
+    <a href="contact.html" class="btn btn-brass btn-full" style="margin-top: 16px;">Get a Quote</a>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container" style="text-align: center;">
+        <span class="pill-tag pill-tag-outline">Portfolio Archive</span>
+        <h1 class="hero-headline" style="margin: 16px 0;">
+          Executed spaces across <span class="italic-brass">Bangalore</span>.
+        </h1>
+        <p class="hero-subtext" style="margin: 0 auto 24px;">
+          Filter by product line to view real living room fit-outs, modular kitchens, wardrobes, and luxury bathroom transformations.
+        </p>
+
+        <!-- FILTER TABS -->
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">All Projects (16)</button>
+          <button class="filter-btn" data-filter="interiors">Product 01 · Interiors</button>
+          <button class="filter-btn" data-filter="bathroom">Product 02 · Bathrooms</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section section-padding">
+      <div class="container">
+        <!-- 16 PHOTO PLACEHOLDER TILES -->
+        <div class="gallery-grid">
+          <!-- 1 -->
+          <div class="gallery-item gallery-tile-2x2" data-category="interiors">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Living & Dining Room · HSR Layout</div>
+          </div>
+          <!-- 2 -->
+          <div class="gallery-item" data-category="bathroom">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Frameless Shower Suite · Indiranagar</div>
+          </div>
+          <!-- 3 -->
+          <div class="gallery-item" data-category="interiors">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Acrylic Kitchen · Sarjapur</div>
+          </div>
+          <!-- 4 -->
+          <div class="gallery-item" data-category="interiors">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Glass Wardrobe · Koramangala</div>
+          </div>
+          <!-- 5 -->
+          <div class="gallery-item" data-category="bathroom">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Floating Quartz Vanity · Whitefield</div>
+          </div>
+          <!-- 6 -->
+          <div class="gallery-item" data-category="interiors">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Cove Ceiling · Electronic City</div>
+          </div>
+          <!-- 7 -->
+          <div class="gallery-item" data-category="bathroom">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Concealed Rain Shower · JP Nagar</div>
+          </div>
+          <!-- 8 -->
+          <div class="gallery-item" data-category="interiors">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Foyer Partition · Bellandur</div>
+          </div>
+          <!-- 9 -->
+          <div class="gallery-item" data-category="bathroom">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Terrazzo Tile Feature · Jayanagar</div>
+          </div>
+          <!-- 10 -->
+          <div class="gallery-item" data-category="interiors">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">PU Finish Kitchen · Hebbal</div>
+          </div>
+          <!-- 11 -->
+          <div class="gallery-item" data-category="bathroom">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Recessed Wall Niche · Bannerghatta</div>
+          </div>
+          <!-- 12 -->
+          <div class="gallery-item" data-category="interiors">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Study Niche Fit-Out · Yelahanka</div>
+          </div>
+          <!-- 13 -->
+          <div class="gallery-item" data-category="bathroom">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Freestanding Spa Tub · Sadashivnagar</div>
+          </div>
+          <!-- 14 -->
+          <div class="gallery-item" data-category="interiors">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">TV Unit & Wall Paneling · Marathahalli</div>
+          </div>
+          <!-- 15 -->
+          <div class="gallery-item" data-category="interiors">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Master Bedroom Storage · Hennur</div>
+          </div>
+          <!-- 16 -->
+          <div class="gallery-item" data-category="bathroom">
+            <div class="gallery-bg-mesh"></div>
+            <div class="gallery-overlay-badge">Matt Black Fixture Set · RT Nagar</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <a href="index.html" class="brand-logo" style="margin-bottom: 8px;">
+            Livona <span class="space-text">Space</span>
+          </a>
+          <div class="footer-copy">
+            © 2026 Livona Space. All rights reserved.
+          </div>
+        </div>
+
+        <div class="footer-contact">
+          Bangalore, India · hello@livona.space
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
