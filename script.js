@@ -219,9 +219,15 @@ function initFormHandler() {
 }
 
 /* --------------------------------------------------------------------------
-   6. LIVONA AI ASSISTANT FLOATING CHATBOT WIDGET
+   6. LIVONA AI ASSISTANT (LOCAL TIME GREETING + MANDATORY NAME & PHONE STEP)
    -------------------------------------------------------------------------- */
 function initAiChatbot() {
+  // Determine local time greeting
+  const hour = new Date().getHours();
+  let timeGreeting = 'Good evening! 🌙';
+  if (hour >= 5 && hour < 12) timeGreeting = 'Good morning! ☀️';
+  else if (hour >= 12 && hour < 17) timeGreeting = 'Good afternoon! 🌤️';
+
   // Inject Widget DOM
   const widgetContainer = document.createElement('div');
   widgetContainer.id = 'aiChatbotApp';
@@ -241,19 +247,13 @@ function initAiChatbot() {
 
       <div class="ai-chat-body" id="aiChatBody">
         <div class="ai-msg ai-msg-bot">
-          Hello! 👋 I'm Livona's AI Project Assistant. How can I help you today?
-          <div class="ai-quick-pills">
-            <button class="ai-pill-btn" data-query="bathroom pricing">🚽 Bathroom Pricing Tiers</button>
-            <button class="ai-pill-btn" data-query="interior pricing">🏠 Interior Fit-Out Pricing</button>
-            <button class="ai-pill-btn" data-query="waterproofing">🛡️ Waterproofing Guarantee</button>
-            <button class="ai-pill-btn" data-query="book meeting">📅 Book Site Visit</button>
-          </div>
+          ${timeGreeting} Welcome to Livona Space.<br><br>To connect you with the right project engineer, may I please have your <strong>Full Name</strong>?
         </div>
       </div>
 
       <div class="ai-chat-footer">
-        <input type="text" id="aiInput" class="ai-chat-input" placeholder="Ask about pricing, timelines, or waterproofing...">
-        <button class="ai-chat-send" id="aiSend">Send</button>
+        <input type="text" id="aiInput" class="ai-chat-input" placeholder="Type your Full Name to begin...">
+        <button class="ai-chat-send" id="aiSend">Next →</button>
       </div>
     </div>
   `;
@@ -268,8 +268,16 @@ function initAiChatbot() {
 
   if (!launcher || !drawer || !closeBtn || !chatBody || !input || !sendBtn) return;
 
+  // Onboarding state tracking
+  let leadState = 'NEEDS_NAME'; // 'NEEDS_NAME' -> 'NEEDS_PHONE' -> 'UNLOCKED'
+  let userLeadName = '';
+  let userLeadPhone = '';
+
   launcher.addEventListener('click', () => {
     drawer.classList.toggle('open');
+    if (drawer.classList.contains('open') && leadState === 'NEEDS_NAME') {
+      input.focus();
+    }
   });
 
   closeBtn.addEventListener('click', () => {
@@ -285,22 +293,94 @@ function initAiChatbot() {
   });
 
   sendBtn.addEventListener('click', () => {
-    const val = input.value.trim();
-    if (val) {
-      handleAiQuery(val, val);
-      input.value = '';
-    }
+    processInput();
   });
 
   input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-      const val = input.value.trim();
-      if (val) {
-        handleAiQuery(val, val);
-        input.value = '';
-      }
+      processInput();
     }
   });
+
+  function processInput() {
+    const val = input.value.trim();
+    if (!val) return;
+
+    if (leadState === 'NEEDS_NAME') {
+      userLeadName = val;
+      appendMsg(userLeadName, true);
+      input.value = '';
+      leadState = 'NEEDS_PHONE';
+
+      input.placeholder = 'Enter 10-digit mobile number...';
+      input.type = 'tel';
+      input.maxLength = 10;
+
+      setTimeout(() => {
+        appendMsg(`Nice to meet you, <strong>${userLeadName}</strong>! 👋<br><br>Please enter your <strong>10-digit mobile number</strong> to unlock instant AI pricing & scope breakdowns.`);
+      }, 400);
+
+    } else if (leadState === 'NEEDS_PHONE') {
+      const phoneDigits = val.replace(/\D/g, '');
+      appendMsg(val, true);
+      input.value = '';
+
+      if (phoneDigits.length !== 10 || !/^[6-9]\d{9}$/.test(phoneDigits)) {
+        setTimeout(() => {
+          appendMsg(`⚠️ Please enter a valid <strong>10-digit mobile number</strong> (e.g. 8317493619) to proceed.`);
+        }, 400);
+        return;
+      }
+
+      userLeadPhone = phoneDigits;
+      leadState = 'UNLOCKED';
+
+      // 1. Dispatch lead to email & localStorage
+      const enquiry = {
+        name: userLeadName,
+        phone: userLeadPhone,
+        source: 'AI Chatbot',
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        const existing = JSON.parse(localStorage.getItem('livona_enquiries') || '[]');
+        existing.push(enquiry);
+        localStorage.setItem('livona_enquiries', JSON.stringify(existing));
+      } catch (err) {}
+
+      fetch('https://formsubmit.co/ajax/ravi.bhargaw@meaven.in', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          Name: userLeadName,
+          Phone: userLeadPhone,
+          Source: 'AI Assistant Chatbot',
+          _subject: `New AI Chatbot Lead: ${userLeadName} (${userLeadPhone})`
+        })
+      }).catch(() => {});
+
+      input.placeholder = 'Ask about pricing, timelines, or waterproofing...';
+      input.type = 'text';
+      input.removeAttribute('maxLength');
+      sendBtn.innerText = 'Send';
+
+      setTimeout(() => {
+        appendMsg(`Thank you, <strong>${userLeadName}</strong>! 🎉 Your consultation request has been logged.<br><br>What would you like to explore today?
+          <div class="ai-quick-pills">
+            <button class="ai-pill-btn" data-query="bathroom pricing">🚽 Bathroom Pricing Tiers</button>
+            <button class="ai-pill-btn" data-query="interior pricing">🏠 Interior Fit-Out Pricing</button>
+            <button class="ai-pill-btn" data-query="waterproofing">🛡️ Waterproofing Guarantee</button>
+            <button class="ai-pill-btn" data-query="book meeting">💬 Chat on WhatsApp</button>
+          </div>`);
+      }, 400);
+
+    } else {
+      // UNLOCKED STATE
+      handleAiQuery(val, val);
+      input.value = '';
+    }
+  }
 
   function appendMsg(text, isUser = false) {
     const msgDiv = document.createElement('div');
@@ -316,33 +396,32 @@ function initAiChatbot() {
     const q = queryType.toLowerCase();
     let reply = '';
 
+    const waLink = `https://wa.me/918317493619?text=` + encodeURIComponent(`Hi Livona Space! I am ${userLeadName || 'a visitor'} (${userLeadPhone || ''}). I would like to schedule a site measurement consultation.`);
+
     if (q.includes('bathroom') || q.includes('wet')) {
       reply = `<strong>Bathroom Renovation Pricing (4'x7' Standard):</strong><br>
       • <strong>Essential Tier:</strong> ₹1,25,000 + GST<br>
-      • <strong>Signature Tier (Popular):</strong> ₹1,55,000 + GST<br>
+      • <strong>Signature Tier (Most Popular):</strong> ₹1,55,000 + GST<br>
       • <strong>Elite Tier:</strong> ₹2,05,000 + GST<br><br>
-      All tiers include 7-10 day delivery, 3-layer waterproofing, and debris removal! <br><br>
-      <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click here to Book a Free Bathroom Audit 📅</a>`;
+      Includes 7-10 day delivery, 3-layer waterproofing, and fixture installation!<br><br>
+      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click to Schedule Site Measurement via WhatsApp 💬</a>`;
     } else if (q.includes('interior') || q.includes('fit-out') || q.includes('kitchen') || q.includes('2bhk') || q.includes('3bhk')) {
       reply = `<strong>Residential Interior Fit-Outs:</strong><br>
       • <strong>Standard Scope:</strong> ₹1,450 - ₹1,750 / sq.ft.<br>
       • <strong>Premium Scope:</strong> ₹1,850 - ₹2,250 / sq.ft.<br><br>
-      Includes factory precision modular kitchens, floor-to-ceiling wardrobes, false ceiling, and 45-day guaranteed handover.<br><br>
-      <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Schedule a Site Measurement on Google Calendar 📅</a>`;
+      Includes factory precision modular kitchens, wardrobes, false ceiling, and 45-day guaranteed handover.<br><br>
+      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click to Schedule Site Measurement via WhatsApp 💬</a>`;
     } else if (q.includes('waterproof') || q.includes('leak') || q.includes('guarantee')) {
       reply = `<strong>100% Multi-Layer Waterproofing Guarantee:</strong><br>
-      We use polymer-modified cementitious slurry + elastomeric membrane coating across wet areas and wall corners, backed by an official 5-year warranty against seepage.`;
-    } else if (q.includes('book') || q.includes('meeting') || q.includes('visit') || q.includes('calendar')) {
-      reply = `You can directly book a site visit on our Google Calendar:<br><br>
-      <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" style="background: var(--ink); color: #fff; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-block; font-size: 0.8rem; margin-top: 4px;">📅 Open Google Calendar Booking</a><br><br>
-      Or call/WhatsApp us directly at <strong>+91 83174 93619</strong>!`;
-    } else if (/\d{10}/.test(q)) {
-      reply = `Thank you! We have logged your mobile number (<strong>${q}</strong>). A Livona Space project engineer will call or WhatsApp you within 2 hours!`;
+      We apply polymer-modified cementitious slurry + elastomeric membrane coating across wet areas and wall corners, backed by an official 5-year warranty against seepage.`;
+    } else if (q.includes('book') || q.includes('meeting') || q.includes('visit') || q.includes('whatsapp')) {
+      reply = `Click below to chat directly with our project engineer on WhatsApp:<br><br>
+      <a href="${waLink}" target="_blank" rel="noopener" style="background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 20px; text-decoration: none; display: inline-block; font-size: 0.85rem; font-weight: 700;">💬 Open WhatsApp Chat (+91 83174 93619)</a>`;
     } else {
       reply = `Livona Space delivers fixed-scope residential interiors and 7-10 day bathroom renovations in Bangalore.<br><br>
       • Call/WhatsApp: <strong>+91 83174 93619</strong><br>
-      • Email: <strong>livona.space@gmail.com</strong><br><br>
-      <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click here to Book a Free Site Measurement 📅</a>`;
+      • Email: <strong>hey@livona.space</strong><br><br>
+      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click to Schedule Site Measurement via WhatsApp 💬</a>`;
     }
 
     setTimeout(() => {
