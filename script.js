@@ -161,8 +161,8 @@ function initFormHandler() {
         successMsg.classList.add('show');
       }
 
-      // 3. Email Form Forwarding to hey@livona.space via FormSubmit AJAX
-      fetch('https://formsubmit.co/ajax/hey@livona.space', {
+      // 3. Email Form Forwarding to livona.space@gmail.com via FormSubmit AJAX
+      fetch('https://formsubmit.co/ajax/livona.space@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
