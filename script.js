@@ -44,7 +44,6 @@ function highlightActiveNavLink() {
     const href = link.getAttribute('href');
     if (!href) return;
 
-    // Handle home vs sub-pages
     const isHome = currentPath === '/' || currentPath.endsWith('index.html');
     
     if (isHome && (href === 'index.html' || href === '/index.html' || href === '/')) {
@@ -57,37 +56,13 @@ function highlightActiveNavLink() {
   });
 }
 
-/* --------------------------------------------------------------------------
-   3. PRICING TAB SWITCHING (Index Page / SaaS view)
-   -------------------------------------------------------------------------- */
-function switchPricingTab(tabName) {
-  const tabInteriors = document.getElementById('tabInteriors');
-  const tabBathrooms = document.getElementById('tabBathrooms');
-  const gridInteriors = document.getElementById('gridInteriors');
-  const gridBathrooms = document.getElementById('gridBathrooms');
-
-  if (!tabInteriors || !tabBathrooms || !gridInteriors || !gridBathrooms) return;
-
-  if (tabName === 'interiors') {
-    tabInteriors.classList.add('active-tab', 'active-tab-brass');
-    tabBathrooms.classList.remove('active-tab', 'active-tab-brass', 'active-tab-verdigris');
-    gridInteriors.classList.remove('hidden');
-    gridBathrooms.classList.add('hidden');
-  } else if (tabName === 'bathrooms') {
-    tabBathrooms.classList.add('active-tab', 'active-tab-verdigris');
-    tabInteriors.classList.remove('active-tab', 'active-tab-brass', 'active-tab-verdigris');
-    gridBathrooms.classList.remove('hidden');
-    gridInteriors.classList.add('hidden');
-  }
-}
-
 /* Auto-select plan title in form when navigating to contact */
 function selectPlanInForm(planTitle) {
   sessionStorage.setItem('selectedPlan', planTitle);
 }
 
 /* --------------------------------------------------------------------------
-   4. FAQ ACCORDION TOGGLES
+   3. FAQ ACCORDION TOGGLES
    -------------------------------------------------------------------------- */
 function initFaqAccordions() {
   const faqQuestions = document.querySelectorAll('.faq-question');
@@ -103,7 +78,7 @@ function initFaqAccordions() {
 }
 
 /* --------------------------------------------------------------------------
-   5. GALLERY FILTER TABS
+   4. GALLERY FILTER TABS
    -------------------------------------------------------------------------- */
 function initGalleryFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
@@ -131,7 +106,7 @@ function initGalleryFilters() {
 }
 
 /* --------------------------------------------------------------------------
-   6. FORM HANDLER
+   5. ENHANCED FORM HANDLER (WHATSAPP + EMAIL TO HEY@LIVONA.SPACE)
    -------------------------------------------------------------------------- */
 function initFormHandler() {
   const quoteForm = document.getElementById('quoteForm');
@@ -153,13 +128,72 @@ function initFormHandler() {
   if (quoteForm) {
     quoteForm.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      const name = document.getElementById('userName')?.value || '';
+      const phone = document.getElementById('userPhone')?.value || '';
+      const location = document.getElementById('userLocation')?.value || '';
+      const service = document.getElementById('serviceSelect')?.value || '';
+      const budget = document.getElementById('userBudget')?.value || '';
+      const notes = document.getElementById('userNotes')?.value || '';
+
+      const enquiryData = {
+        name,
+        phone,
+        location,
+        service,
+        budget,
+        notes,
+        timestamp: new Date().toISOString()
+      };
+
+      // 1. Save locally into browser storage backup
+      try {
+        const existingEnquiries = JSON.parse(localStorage.getItem('livona_enquiries') || '[]');
+        existingEnquiries.push(enquiryData);
+        localStorage.setItem('livona_enquiries', JSON.stringify(existingEnquiries));
+      } catch (err) {
+        console.warn('LocalStorage save skipped:', err);
+      }
+
+      // 2. Show UI Success message
       const successMsg = document.getElementById('formSuccessMsg');
       if (successMsg) {
         successMsg.classList.add('show');
-        setTimeout(() => {
-          quoteForm.reset();
-        }, 600);
       }
+
+      // 3. Email Form Forwarding to hey@livona.space via FormSubmit AJAX
+      fetch('https://formsubmit.co/ajax/hey@livona.space', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: name,
+          Phone: phone,
+          Location: location,
+          Service: service,
+          Budget: budget || 'Not specified',
+          Notes: notes || 'None',
+          _subject: `New Livona Space Lead: ${name} (${service})`
+        })
+      }).catch(err => console.warn('Email dispatch:', err));
+
+      // 4. Open pre-filled WhatsApp message directly to 8317493619
+      const waText = encodeURIComponent(
+        `*New Site Visit Request — Livona Space*\n\n` +
+        `*Name:* ${name}\n` +
+        `*Phone:* ${phone}\n` +
+        `*Location:* ${location}\n` +
+        `*Service:* ${service}\n` +
+        `*Budget:* ${budget || 'Not specified'}\n` +
+        `*Notes:* ${notes || 'None'}`
+      );
+
+      setTimeout(() => {
+        window.open(`https://wa.me/918317493619?text=${waText}`, '_blank');
+        quoteForm.reset();
+      }, 800);
     });
   }
 }
