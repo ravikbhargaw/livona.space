@@ -398,54 +398,44 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   4. PLACEHOLDER BOX & COLLAGE COMPONENTS
+   4. IMAGE FRAME & COLLAGE COMPONENTS
    -------------------------------------------------------------------------- */
-.placeholder-box {
-  background-color: #EFECE6;
-  border: 1px dashed rgba(36, 33, 29, 0.25);
-  border-radius: var(--radius-md);
+.img-card {
   position: relative;
+  border-radius: var(--radius-md);
   overflow: hidden;
+  background-color: #EFECE6;
+  border: 1px solid rgba(36, 33, 29, 0.15);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 16px;
-  transition: border-color var(--transition-fast);
 }
 
-.placeholder-box:hover {
-  border-color: var(--brass);
+.img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
 }
 
-.placeholder-bg-pattern {
+.img-card:hover img {
+  transform: scale(1.05);
+}
+
+.img-badge-overlay {
   position: absolute;
-  inset: 0;
-  opacity: 0.08;
-  background-image: linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px);
-  background-size: 20px 20px;
-  pointer-events: none;
-}
-
-.placeholder-label {
+  bottom: 12px;
+  left: 12px;
+  z-index: 2;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--ink-soft);
-  background: var(--card-bg);
+  color: var(--ink);
+  background: rgba(250, 248, 245, 0.92);
+  backdrop-filter: blur(4px);
   padding: 4px 10px;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(36, 33, 29, 0.12);
-  z-index: 2;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
-}
-
-.placeholder-icon {
-  color: var(--ink-soft);
-  opacity: 0.6;
-  z-index: 2;
+  text-transform: uppercase;
 }
 
 /* Hero Visual Card */
@@ -1064,36 +1054,28 @@ img {
   transition: transform var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
 }
 
-.gallery-item.hidden {
-  display: none !important;
-}
-
-.gallery-item:hover {
-  transform: scale(1.01);
-  border-color: var(--brass);
-}
-
-.gallery-item:hover .gallery-bg-mesh {
-  opacity: 0.15;
-  transform: scale(1.05);
-}
-
-.gallery-bg-mesh {
+.gallery-item img {
   position: absolute;
   inset: 0;
-  background-color: #E3DFD5;
-  background-image: 
-    radial-gradient(var(--ink) 1px, transparent 1px),
-    linear-gradient(45deg, rgba(169, 130, 44, 0.1), rgba(79, 107, 98, 0.1));
-  background-size: 16px 16px, 100% 100%;
-  opacity: 0.08;
-  transition: all var(--transition-smooth);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+  z-index: 1;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+.gallery-item.hidden {
+  display: none !important;
 }
 
 .gallery-overlay-badge {
   position: relative;
   z-index: 2;
-  background: rgba(36, 33, 29, 0.9);
+  background: rgba(36, 33, 29, 0.88);
   backdrop-filter: blur(4px);
   color: #FFFFFF;
   font-family: var(--font-mono);
@@ -1143,6 +1125,18 @@ img {
 .blog-card-image {
   height: 200px;
   position: relative;
+  overflow: hidden;
+}
+
+.blog-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.blog-card:hover .blog-card-image img {
+  transform: scale(1.05);
 }
 
 .blog-card-content {
@@ -1219,6 +1213,16 @@ img {
 .article-hero-img {
   height: 380px;
   margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(36, 33, 29, 0.15);
+}
+
+.article-hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .article-content {
@@ -1361,7 +1365,7 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   13. CONTACT SECTION & MAP PLACEHOLDER
+   13. CONTACT SECTION & MAP CONTAINER
    -------------------------------------------------------------------------- */
 .contact-section {
   background-color: var(--bg-soft);
@@ -1500,17 +1504,19 @@ img {
   display: block;
 }
 
-.map-placeholder-box {
-  height: 220px;
-  background-color: #EFECE6;
-  border: 1px dashed rgba(36, 33, 29, 0.25);
+.map-card-box {
+  position: relative;
+  height: 240px;
+  border: 1px solid rgba(36, 33, 29, 0.15);
   border-radius: var(--radius-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 24px;
+  overflow: hidden;
+  background-color: #EFECE6;
+}
+
+.map-card-box iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 /* --------------------------------------------------------------------------
