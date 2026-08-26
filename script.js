@@ -106,12 +106,28 @@ function initGalleryFilters() {
 }
 
 /* --------------------------------------------------------------------------
-   5. ENHANCED FORM HANDLER (WHATSAPP + EMAIL TO HEY@LIVONA.SPACE)
+   5. ENHANCED FORM HANDLER (STRICT 10-DIGIT PHONE VALIDATION)
    -------------------------------------------------------------------------- */
 function initFormHandler() {
   const quoteForm = document.getElementById('quoteForm');
   const serviceSelect = document.getElementById('serviceSelect');
   const userNotes = document.getElementById('userNotes');
+  const userPhone = document.getElementById('userPhone');
+
+  // Strict real-time digit restrictor on userPhone input
+  if (userPhone) {
+    userPhone.addEventListener('input', () => {
+      // Clear custom error message on typing
+      userPhone.setCustomValidity('');
+      // Strip out non-digits
+      let digits = userPhone.value.replace(/\D/g, '');
+      // Limit max 10 digits
+      if (digits.length > 10) {
+        digits = digits.slice(0, 10);
+      }
+      userPhone.value = digits;
+    });
+  }
 
   // Pre-fill selected plan from session storage if redirected from pricing
   const savedPlan = sessionStorage.getItem('selectedPlan');
@@ -129,16 +145,29 @@ function initFormHandler() {
     quoteForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const name = document.getElementById('userName')?.value || '';
-      const phone = document.getElementById('userPhone')?.value || '';
-      const location = document.getElementById('userLocation')?.value || '';
+      const name = document.getElementById('userName')?.value.trim() || '';
+      const rawPhone = document.getElementById('userPhone')?.value.trim() || '';
+      const location = document.getElementById('userLocation')?.value.trim() || '';
       const service = document.getElementById('serviceSelect')?.value || '';
       const budget = document.getElementById('userBudget')?.value || '';
-      const notes = document.getElementById('userNotes')?.value || '';
+      const notes = document.getElementById('userNotes')?.value.trim() || '';
+
+      // Strict 10-digit mobile validation check
+      const phoneDigits = rawPhone.replace(/\D/g, '');
+      const isValidTenDigits = /^[6-9]\d{9}$/.test(phoneDigits) || /^\d{10}$/.test(phoneDigits);
+
+      if (!isValidTenDigits || phoneDigits.length !== 10) {
+        if (userPhone) {
+          userPhone.setCustomValidity('Please enter a valid 10-digit mobile number (e.g. 8317493619)');
+          userPhone.reportValidity();
+          userPhone.focus();
+        }
+        return;
+      }
 
       const enquiryData = {
         name,
-        phone,
+        phone: phoneDigits,
         location,
         service,
         budget,
@@ -170,7 +199,7 @@ function initFormHandler() {
         },
         body: JSON.stringify({
           Name: name,
-          Phone: phone,
+          Phone: phoneDigits,
           Location: location,
           Service: service,
           Budget: budget || 'Not specified',
@@ -183,7 +212,7 @@ function initFormHandler() {
       const waText = encodeURIComponent(
         `*New Site Visit Request — Livona Space*\n\n` +
         `*Name:* ${name}\n` +
-        `*Phone:* ${phone}\n` +
+        `*Phone:* ${phoneDigits}\n` +
         `*Location:* ${location}\n` +
         `*Service:* ${service}\n` +
         `*Budget:* ${budget || 'Not specified'}\n` +
