@@ -128,12 +128,14 @@ function initFormHandler() {
 
   const savedPlan = sessionStorage.getItem('selectedPlan');
   if (savedPlan && serviceSelect && userNotes) {
-    if (savedPlan.includes('Interior')) {
+    if (savedPlan.includes('Complete Home')) {
+      serviceSelect.value = 'Complete Home Renovation';
+    } else if (savedPlan.includes('Interior')) {
       serviceSelect.value = 'Interior Fit-Out';
     } else if (savedPlan.includes('Bathroom')) {
       serviceSelect.value = 'Bathroom Renovation';
     }
-    userNotes.value = `Interested in the ${savedPlan} package scope.`;
+    userNotes.value = `Interested in the ${savedPlan} scope.`;
     sessionStorage.removeItem('selectedPlan');
   }
 
@@ -249,8 +251,13 @@ function initAiChatbot() {
       </div>
 
       <div class="ai-chat-footer">
-        <input type="text" id="aiInput" class="ai-chat-input" placeholder="Type your Full Name to begin...">
-        <button class="ai-chat-send" id="aiSend">Next →</button>
+        <div style="display: flex; gap: 8px; width: 100%;">
+          <input type="text" id="aiInput" class="ai-chat-input" placeholder="Type your Full Name to begin...">
+          <button class="ai-chat-send" id="aiSend">Next →</button>
+        </div>
+        <p style="font-size: 0.72rem; color: var(--ink-soft); margin-top: 6px; line-height: 1.3; text-align: center;">
+          By submitting, you agree to our <a href="privacy.html" target="_blank" style="color: var(--brass); text-decoration: underline;">Privacy Policy</a> & to be contacted regarding your enquiry.
+        </p>
       </div>
     </div>
   `;
@@ -312,7 +319,7 @@ function initAiChatbot() {
       input.maxLength = 10;
 
       setTimeout(() => {
-        appendMsg(`Nice to meet you, <strong>${userLeadName}</strong>! 👋<br><br>Please enter your <strong>10-digit mobile number</strong> to unlock instant AI pricing & scope breakdowns.`);
+        appendMsg(`Nice to meet you, <strong>${userLeadName}</strong>! 👋<br><br>Please enter your <strong>10-digit mobile number</strong> to unlock instant AI pricing & scope breakdowns.<br><br><small style="opacity:0.85;">By submitting, you agree to our <a href="privacy.html" target="_blank" style="color:var(--brass); text-decoration:underline;">Privacy Policy</a> and to be contacted regarding your enquiry.</small>`);
       }, 400);
 
     } else if (leadState === 'NEEDS_PHONE') {
@@ -357,67 +364,93 @@ function initAiChatbot() {
         body: fd
       }).catch(err => console.warn('Chatbot email error:', err));
 
-      input.placeholder = 'Ask about pricing, timelines, or waterproofing...';
-      input.type = 'text';
-      input.removeAttribute('maxLength');
-      sendBtn.innerText = 'Send';
-
       setTimeout(() => {
-        appendMsg(`Thank you, <strong>${userLeadName}</strong>! 🎉 Your consultation request has been logged.<br><br>What would you like to explore today?
-          <div class="ai-quick-pills">
-            <button class="ai-pill-btn" data-query="bathroom pricing">🚽 Bathroom Pricing Tiers</button>
-            <button class="ai-pill-btn" data-query="interior pricing">🏠 Interior Fit-Out Pricing</button>
-            <button class="ai-pill-btn" data-query="waterproofing">🛡️ Waterproofing Guarantee</button>
-            <button class="ai-pill-btn" data-query="book meeting">💬 Chat on WhatsApp</button>
-          </div>`);
-      }, 400);
+        appendMsg(`🎉 Thank you, <strong>${userLeadName}</strong>! Your details have been logged.<br><br>What would you like to explore today? Select an option below:`, false, [
+          { text: '🏡 Complete Home Renovation', query: 'home-renovation' },
+          { text: '🛋️ Interiors & Room Packages', query: 'interiors' },
+          { text: '🛁 Bathroom Packages', query: 'bathroom' },
+          { text: '📋 Process & Site Visit Rule', query: 'process' }
+        ]);
 
+        // Hide input footer once unlocked
+        const footer = document.querySelector('.ai-chat-footer');
+        if (footer) footer.style.display = 'none';
+      }, 500);
     } else {
-      handleAiQuery(val, val);
+      handleAiQuery('general', val);
       input.value = '';
     }
   }
 
-  function appendMsg(text, isUser = false) {
+  function appendMsg(text, isUser = false, pills = null) {
     const msgDiv = document.createElement('div');
     msgDiv.className = `ai-msg ${isUser ? 'ai-msg-user' : 'ai-msg-bot'}`;
     msgDiv.innerHTML = text;
     chatBody.appendChild(msgDiv);
+
+    if (pills && Array.isArray(pills)) {
+      const pillGroup = document.createElement('div');
+      pillGroup.className = 'ai-pill-group';
+      pills.forEach(p => {
+        const btn = document.createElement('button');
+        btn.className = 'ai-pill-btn';
+        btn.setAttribute('data-query', p.query);
+        btn.innerText = p.text;
+        pillGroup.appendChild(btn);
+      });
+      chatBody.appendChild(pillGroup);
+    }
+
     chatBody.scrollTop = chatBody.scrollHeight;
   }
 
-  function handleAiQuery(queryType, userText) {
-    appendMsg(userText, true);
+  function handleAiQuery(queryType, labelText) {
+    if (labelText) {
+      appendMsg(labelText, true);
+    }
 
     const q = queryType.toLowerCase();
     let reply = '';
 
-    const waLink = `https://wa.me/918317493619?text=` + encodeURIComponent(`Hi Livona Space! I am ${userLeadName || 'a visitor'} (${userLeadPhone || ''}). I would like to schedule a site measurement consultation.`);
+    const waLink = `https://wa.me/918317493619?text=` + encodeURIComponent(`Hi Livona Space! I am ${userLeadName || 'a visitor'} (${userLeadPhone || ''}). I would like to request a consultation.`);
 
-    if (q.includes('bathroom') || q.includes('wet')) {
-      reply = `<strong>Bathroom Renovation Pricing (4'x7' Standard):</strong><br>
+    if (q.includes('full home') || q.includes('complete home') || q.includes('bespoke') || q.includes('civil') || q.includes('entire')) {
+      reply = `<strong>Complete Home Renovation (Bespoke Offering):</strong><br>
+      • Single-vendor coverage: civil work, electrical rewiring, plumbing overhaul, flooring, false ceiling, painting, modular kitchen, wardrobes, and bathrooms.<br>
+      • <strong>Pricing:</strong> Typically ranges between <strong>₹2,400 – ₹2,800/sq.ft</strong> depending on civil/MEP scope & finishes (custom-quoted after free site assessment).<br><br>
+      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Request a Free Site Visit & Custom Quote via WhatsApp 💬</a>`;
+    } else if (q.includes('bathroom') || q.includes('wet')) {
+      reply = `<strong>Bathroom Renovation Packages (4'x7' Standard):</strong><br>
       • <strong>Essential Tier:</strong> ₹1,25,000 + GST<br>
       • <strong>Signature Tier (Most Popular):</strong> ₹1,55,000 + GST<br>
       • <strong>Elite Tier:</strong> ₹2,05,000 + GST<br><br>
       Includes 7-10 day delivery, 3-layer waterproofing, and fixture installation!<br><br>
-      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click to Schedule Site Measurement via WhatsApp 💬</a>`;
-    } else if (q.includes('interior') || q.includes('fit-out') || q.includes('kitchen') || q.includes('2bhk') || q.includes('3bhk')) {
-      reply = `<strong>Residential Interior Fit-Outs:</strong><br>
-      • <strong>Standard Scope:</strong> ₹1,450 - ₹1,750 / sq.ft.<br>
-      • <strong>Premium Scope:</strong> ₹1,850 - ₹2,250 / sq.ft.<br><br>
+      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 View Bathroom Pricing Plans via WhatsApp 💬</a>`;
+    } else if (q.includes('interior') || q.includes('fit-out') || q.includes('kitchen') || q.includes('bedroom') || q.includes('living')) {
+      reply = `<strong>Room & Interior Packages:</strong><br>
+      • <strong>Basic Tier:</strong> ₹1,450 / sq.ft.<br>
+      • <strong>Pro Tier:</strong> ₹2,100 / sq.ft.<br><br>
       Includes factory precision modular kitchens, wardrobes, false ceiling, and 45-day guaranteed handover.<br><br>
-      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click to Schedule Site Measurement via WhatsApp 💬</a>`;
+      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 See Interior Pricing Plans via WhatsApp 💬</a>`;
+    } else if (q.includes('process') || q.includes('step') || q.includes('visit') || q.includes('quote')) {
+      reply = `<strong>Our Standard 5-Step Process:</strong><br>
+      01 — Virtual Consultation<br>
+      02 — Mood Board & Preliminary Quote<br>
+      03 — Design Token<br>
+      04 — Design Phase<br>
+      05 — Execution<br><br>
+      💡 <strong>Site Visit Rule:</strong> For standardized packages (Bathroom Renovation, Kitchen Package, Bedroom Package, Living Room Package), your quote is finalized remotely based on your floor plan — no site visit needed until execution. For fully customized or bespoke projects, we offer a free in-person site visit before you commit to the design token.`;
     } else if (q.includes('waterproof') || q.includes('leak') || q.includes('guarantee')) {
       reply = `<strong>100% Multi-Layer Waterproofing Guarantee:</strong><br>
       We apply polymer-modified cementitious slurry + elastomeric membrane coating across wet areas and wall corners, backed by an official 5-year warranty against seepage.`;
-    } else if (q.includes('book') || q.includes('meeting') || q.includes('visit') || q.includes('whatsapp')) {
+    } else if (q.includes('book') || q.includes('meeting') || q.includes('whatsapp')) {
       reply = `Click below to chat directly with our project engineer on WhatsApp:<br><br>
       <a href="${waLink}" target="_blank" rel="noopener" style="background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 20px; text-decoration: none; display: inline-block; font-size: 0.85rem; font-weight: 700;">💬 Open WhatsApp Chat (+91 83174 93619)</a>`;
     } else {
-      reply = `Livona Space delivers fixed-scope residential interiors and 7-10 day bathroom renovations in Bangalore.<br><br>
+      reply = `Livona Space delivers standardized room packages and full home bespoke renovations.<br><br>
       • Call/WhatsApp: <strong>+91 83174 93619</strong><br>
       • Email: <strong>hey@livona.space</strong><br><br>
-      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Click to Schedule Site Measurement via WhatsApp 💬</a>`;
+      <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Request a Consultation via WhatsApp 💬</a>`;
     }
 
     setTimeout(() => {

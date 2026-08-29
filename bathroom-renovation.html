@@ -63,8 +63,29 @@
         <nav aria-label="Main Navigation">
           <ul class="nav-menu">
             <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="interiors.html" class="nav-link">Interiors</a></li>
-            <li><a href="bathroom-renovation.html" class="nav-link active-nav">Bathroom Renovation</a></li>
+            <li class="nav-item-dropdown">
+              <a href="bathroom-renovation.html" class="nav-link dropdown-toggle active-nav">Services ▾</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="home-renovation.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Complete Home Renovation</span>
+                    <span class="dropdown-item-desc">Full house, bespoke single-vendor</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="interiors.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Interiors & Room Packages</span>
+                    <span class="dropdown-item-desc">Kitchen, Bedroom & Living Room packages</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="bathroom-renovation.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Bathroom Renovation</span>
+                    <span class="dropdown-item-desc">7-10 day wet area overhaul</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li><a href="gallery.html" class="nav-link">Gallery</a></li>
             <li><a href="blog.html" class="nav-link">Blog</a></li>
             <li><a href="about.html" class="nav-link">About</a></li>
@@ -89,7 +110,8 @@
   <!-- Mobile Drawer -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" class="mobile-nav-link">Home</a>
-    <a href="interiors.html" class="mobile-nav-link">Interiors</a>
+    <a href="home-renovation.html" class="mobile-nav-link">Complete Home Renovation</a>
+    <a href="interiors.html" class="mobile-nav-link">Interiors & Room Packages</a>
     <a href="bathroom-renovation.html" class="mobile-nav-link active-nav">Bathroom Renovation</a>
     <a href="gallery.html" class="mobile-nav-link">Gallery</a>
     <a href="blog.html" class="mobile-nav-link">Blog</a>
@@ -104,24 +126,29 @@
       <div class="container">
         <div class="page-hero-grid">
           <div>
-            <span class="pill-tag pill-tag-verdigris">Product 02 · Bathrooms</span>
+            <span class="pill-tag pill-tag-verdigris">Category 03 · Fixed Packages</span>
             <h1 class="hero-headline">
               Boutique <span class="italic-verdigris">wet-area transformations</span> delivered in 7-10 days.
             </h1>
             <p class="hero-subtext">
-              We fix leaks, upgrade plumbing, and craft luxurious modern bathrooms without long disruption. 100% multi-layer waterproofing guarantee for residences across Bangalore.
+              Fixed-tier bathroom renovation packages with transparent pricing. 100% multi-layer waterproofing guarantee, precision tiling, concealed wall plumbing, shower glass, and custom floating vanities.
             </p>
             <div class="hero-cta-group">
-              <a href="#pricing" class="btn btn-verdigris">Explore Itemized Tiers ↓</a>
-              <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" class="btn btn-outline">Book Bathroom Audit 📅</a>
+              <a href="#pricing" class="btn btn-verdigris">See Pricing Plans ↓</a>
+              <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20am%20interested%20in%20a%20Bathroom%20Renovation%20Package." target="_blank" rel="noopener" class="btn btn-outline">Request Consultation 📅</a>
             </div>
           </div>
 
           <!-- Prominent Hero Visual -->
           <div class="img-card" style="height: 320px;">
             <img src="images/bathroom-main.jpg" alt="Boutique Luxury Bathroom Transformation">
-            <span class="img-badge-overlay">Product 02 · Master Wet Area</span>
+            <span class="img-badge-overlay">Category 03 · Master Wet Area</span>
           </div>
+        </div>
+
+        <!-- CROSS-CATEGORY DISAMBIGUATION COPY -->
+        <div class="disambiguation-box">
+          If you're only renovating one room or one area, choose the relevant fixed package above. If your project spans multiple rooms, structural changes, or a full civil/electrical/plumbing overhaul, choose Complete Home Renovation — in that case, pricing for all included work (including bathrooms/kitchens) is bespoke-quoted as part of the full project, not at fixed package rates.
         </div>
       </div>
     </section>
@@ -401,6 +428,58 @@
       </div>
     </section>
 
+    <!-- STANDARDIZED 5-STEP PROCESS SECTION -->
+    <section class="process-section section-padding" style="background-color: var(--bg-soft);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Standard Pipeline</div>
+          <h2 class="section-title">Our Standardized 5-Step Process</h2>
+          <p class="section-subtext" style="margin: 8px auto 0;">Used for every customer across all project scales for predictable execution.</p>
+        </div>
+
+        <div class="process-grid-5">
+          <div class="process-card">
+            <div class="process-num">01</div>
+            <h3 class="process-card-title">Virtual Consultation</h3>
+            <p class="process-card-desc">Share your requirements and floor plan with our team over a call or video consultation.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">02</div>
+            <h3 class="process-card-title">Mood Board & Preliminary Quote</h3>
+            <p class="process-card-desc">We build a mood board and give you a preliminary quote based on your floor plan.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">03</div>
+            <h3 class="process-card-title">Design Token</h3>
+            <p class="process-card-desc">A token payment moves your project into detailed design, handled by our design partner team.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">04</div>
+            <h3 class="process-card-title">Design Phase</h3>
+            <p class="process-card-desc">Detailed design finalized with your feedback and approval.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">05</div>
+            <h3 class="process-card-title">Execution</h3>
+            <p class="process-card-desc">Our team visits your site to kick off and manage execution end to end.</p>
+          </div>
+        </div>
+
+        <!-- CANONICAL DECISION LOGIC CALLOUT -->
+        <div class="process-callout-box">
+          <div class="callout-icon">💡</div>
+          <div class="callout-content">
+            <strong class="callout-title">Process & Site Visit Note:</strong>
+            <p class="callout-text">For standardized packages (Bathroom Renovation, Kitchen Package, Bedroom Package, Living Room Package), your quote is finalized remotely based on your floor plan — no site visit needed until execution. For fully customized or bespoke projects, we offer a free in-person site visit before you commit to the design token, to ensure accurate scope and pricing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- BATHROOM FAQ -->
     <section class="faq-section section-padding">
       <div class="container">
@@ -410,6 +489,16 @@
         </div>
 
         <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              Is an in-person site visit required before getting a bathroom quote?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              For standardized packages (Bathroom Renovation, Kitchen Package, Bedroom Package, Living Room Package), your quote is finalized remotely based on your floor plan — no site visit needed until execution. For fully customized or bespoke projects, we offer a free in-person site visit before you commit to the design token, to ensure accurate scope and pricing.
+            </div>
+          </div>
+
           <div class="faq-item">
             <button class="faq-question">
               How long does waterproofing take to cure before tiling?
@@ -463,7 +552,7 @@
             Livona <span class="space-text">Space</span>
           </a>
           <div class="footer-copy">
-            © 2026 Livona Space. All rights reserved.
+            © 2026 Livona Space. All rights reserved. · <a href="privacy.html" style="color: var(--ink-soft); text-decoration: underline;">Privacy Policy</a>
           </div>
         </div>
 

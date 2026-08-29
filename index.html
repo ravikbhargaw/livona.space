@@ -104,8 +104,29 @@
         <nav aria-label="Main Navigation">
           <ul class="nav-menu">
             <li><a href="index.html" class="nav-link active-nav">Home</a></li>
-            <li><a href="interiors.html" class="nav-link">Interiors</a></li>
-            <li><a href="bathroom-renovation.html" class="nav-link">Bathroom Renovation</a></li>
+            <li class="nav-item-dropdown">
+              <a href="home-renovation.html" class="nav-link dropdown-toggle">Services ▾</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="home-renovation.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Complete Home Renovation</span>
+                    <span class="dropdown-item-desc">Full house, bespoke single-vendor</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="interiors.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Interiors & Room Packages</span>
+                    <span class="dropdown-item-desc">Kitchen, Bedroom & Living Room packages</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="bathroom-renovation.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Bathroom Renovation</span>
+                    <span class="dropdown-item-desc">7-10 day wet area overhaul</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li><a href="gallery.html" class="nav-link">Gallery</a></li>
             <li><a href="blog.html" class="nav-link">Blog</a></li>
             <li><a href="about.html" class="nav-link">About</a></li>
@@ -114,7 +135,7 @@
         </nav>
 
         <div class="header-actions">
-          <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" class="btn btn-dark">Book Meeting 📅</a>
+          <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20request%20a%20renovation%20consultation." target="_blank" rel="noopener" class="btn btn-dark">Book Meeting 📅</a>
           <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -130,7 +151,8 @@
   <!-- Mobile Drawer -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" class="mobile-nav-link active-nav">Home</a>
-    <a href="interiors.html" class="mobile-nav-link">Interiors</a>
+    <a href="home-renovation.html" class="mobile-nav-link">Complete Home Renovation</a>
+    <a href="interiors.html" class="mobile-nav-link">Interiors & Room Packages</a>
     <a href="bathroom-renovation.html" class="mobile-nav-link">Bathroom Renovation</a>
     <a href="gallery.html" class="mobile-nav-link">Gallery</a>
     <a href="blog.html" class="mobile-nav-link">Blog</a>
@@ -145,17 +167,17 @@
       <div class="container">
         <div class="hero-grid">
           <div class="hero-content">
-            <span class="pill-tag pill-tag-outline">Bangalore · Homes & Bathrooms</span>
+            <span class="pill-tag pill-tag-outline">Three Renovation Categories</span>
             <h1 class="hero-headline">
-              Two products. One <span class="italic-brass">fixed-scope</span> promise.
+              Fixed-scope packages <span class="italic-brass">where it makes sense</span>. Fully custom <span class="italic-brass">where it doesn't</span>.
             </h1>
             <p class="hero-subtext">
-              Livona Space ships interiors and bathroom renovations the way good products ship — clear plans, clear pricing, no scope creep mid-way.
+              Livona Space ships room interior and bathroom renovation packages with transparent pricing, alongside bespoke single-vendor execution for complete home renovations.
             </p>
             <div class="hero-cta-group">
-              <a href="interiors.html" class="btn btn-dark">View Interiors →</a>
-              <a href="bathroom-renovation.html" class="btn btn-outline">View Bathrooms →</a>
-              <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" class="btn btn-brass">Book Meeting 📅</a>
+              <a href="home-renovation.html" class="btn btn-dark">Complete Home Renovation →</a>
+              <a href="interiors.html" class="btn btn-outline">See Interiors Plans →</a>
+              <a href="bathroom-renovation.html" class="btn btn-outline">See Bathroom Packages →</a>
             </div>
           </div>
 
@@ -167,15 +189,15 @@
             <div class="collage-grid-hero">
               <div class="img-card collage-item-main">
                 <img src="images/hero-living.jpg" alt="Living & Dining Space Fit-Out">
-                <span class="img-badge-overlay">Photo 1 / Living & Dining</span>
+                <span class="img-badge-overlay">Photo 1 / Full Living & Dining</span>
               </div>
               <div class="img-card">
                 <img src="images/kitchen-main.jpg" alt="Modular Kitchen">
-                <span class="img-badge-overlay">Photo 2 / Kitchen</span>
+                <span class="img-badge-overlay">Photo 2 / Modular Kitchen</span>
               </div>
               <div class="img-card">
                 <img src="images/bathroom-main.jpg" alt="Luxury Bathroom">
-                <span class="img-badge-overlay">Photo 3 / Bathroom</span>
+                <span class="img-badge-overlay">Photo 3 / Bathroom Overhaul</span>
               </div>
             </div>
           </div>
@@ -183,38 +205,74 @@
       </div>
     </section>
 
-    <!-- PRODUCT 01 — INTERIOR FIT-OUT TEASER -->
+    <!-- CATEGORY 01 — COMPLETE HOME RENOVATION (BESPOKE) -->
     <section class="product-section section-padding">
       <div class="container">
         <div class="product-grid">
           <div class="product-collage">
             <div class="img-card product-collage-featured">
-              <img src="images/living-interior.jpg" alt="Living Room Fit-Out Execution">
-              <span class="img-badge-overlay">Living Room</span>
+              <img src="images/hero-living.jpg" alt="Complete Home Architecture Fit-Out">
+              <span class="img-badge-overlay">Full House Transformation</span>
             </div>
             <div class="img-card">
-              <img src="images/kitchen-detail.jpg" alt="Modular Kitchen Finish">
-              <span class="img-badge-overlay">Modular Kitchen</span>
+              <img src="images/gallery-portfolio.jpg" alt="Civil & Structural Work">
+              <span class="img-badge-overlay">Civil & Electrical</span>
             </div>
             <div class="img-card">
-              <img src="images/wardrobe-main.jpg" alt="Floor to Ceiling Wardrobes">
-              <span class="img-badge-overlay">Wardrobe</span>
+              <img src="images/flooring-detail.jpg" alt="Whole-Home Flooring">
+              <span class="img-badge-overlay">Whole-Home Flooring</span>
             </div>
           </div>
 
           <div class="product-details">
-            <span class="pill-tag pill-tag-brass">Product 01 · Interiors</span>
-            <h2 class="product-title">Interior Fit-Out</h2>
+            <span class="pill-tag pill-tag-brass">Category 01 · Bespoke Offering</span>
+            <h2 class="product-title">Complete Home Renovation</h2>
             <p class="product-desc">
-              Full-home residential fit-out packaged into predictable tiers. Modular kitchens, custom wardrobes, false ceilings, flooring, and precision painting.
+              Comprehensive full-home renovation covered under a single vendor. Civil masonry, electrical rewiring, plumbing overhaul, flooring across the home, false ceilings, painting, modular kitchen, wardrobes, and luxury bathrooms.
+            </p>
+
+            <div class="feature-tags-group">
+              <span class="pill-tag pill-tag-subtle">Civil Masonry</span>
+              <span class="pill-tag pill-tag-subtle">Rewiring & Plumbing</span>
+              <span class="pill-tag pill-tag-subtle">Flooring & Ceilings</span>
+              <span class="pill-tag pill-tag-subtle">Modular Kitchen</span>
+              <span class="pill-tag pill-tag-subtle">Wardrobes & Paint</span>
+            </div>
+
+            <div class="dashed-divider"></div>
+
+            <div class="price-strip-box">
+              <span class="price-label">Indicative Price</span>
+              <span class="price-amount">Starts from ₹2,400/sq.ft</span>
+            </div>
+
+            <div class="dashed-divider"></div>
+
+            <a href="home-renovation.html" class="product-action-link">
+              Get a Free Custom Quote →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY 02 — INTERIORS & ROOM PACKAGES (FIXED TIER) -->
+    <section class="product-section section-padding" style="background-color: var(--bg-concrete);">
+      <div class="container">
+        <div class="product-grid mirrored">
+          <div class="product-details">
+            <span class="pill-tag pill-tag-brass">Category 02 · Fixed Packages</span>
+            <h2 class="product-title">Interiors & Room Packages</h2>
+            <p class="product-desc">
+              Standardized packages for modular kitchens, bedroom wardrobes, and living room fit-outs with transparent tiered pricing. Precision factory joinery, durable finishes, and 45-day fixed timeline guarantees.
             </p>
 
             <div class="feature-tags-group">
               <span class="pill-tag pill-tag-subtle">Modular Kitchen</span>
+              <span class="pill-tag pill-tag-subtle">Bedroom Packages</span>
+              <span class="pill-tag pill-tag-subtle">Living Room Packages</span>
               <span class="pill-tag pill-tag-subtle">Wardrobes</span>
-              <span class="pill-tag pill-tag-subtle">False Ceiling</span>
-              <span class="pill-tag pill-tag-subtle">Flooring</span>
-              <span class="pill-tag pill-tag-subtle">Paint & Finish</span>
+              <span class="pill-tag pill-tag-subtle">Paint & Ceiling</span>
             </div>
 
             <div class="dashed-divider"></div>
@@ -227,22 +285,52 @@
             <div class="dashed-divider"></div>
 
             <a href="interiors.html" class="product-action-link">
-              See Interiors product & plans →
+              See Interiors Plans & Pricing →
             </a>
+          </div>
+
+          <div class="product-collage">
+            <div class="img-card product-collage-featured">
+              <img src="images/living-interior.jpg" alt="Living Room Fit-Out Execution">
+              <span class="img-badge-overlay">Living Room Package</span>
+            </div>
+            <div class="img-card">
+              <img src="images/kitchen-detail.jpg" alt="Modular Kitchen Finish">
+              <span class="img-badge-overlay">Modular Kitchen Package</span>
+            </div>
+            <div class="img-card">
+              <img src="images/wardrobe-main.jpg" alt="Floor to Ceiling Wardrobes">
+              <span class="img-badge-overlay">Bedroom Wardrobe Package</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PRODUCT 02 — BATHROOM RENOVATION TEASER -->
-    <section class="product-section section-padding" style="background-color: var(--bg-concrete);">
+    <!-- CATEGORY 03 — BATHROOM RENOVATION (FIXED TIER) -->
+    <section class="product-section section-padding">
       <div class="container">
-        <div class="product-grid mirrored">
+        <div class="product-grid">
+          <div class="product-collage">
+            <div class="img-card product-collage-featured">
+              <img src="images/shower-glass.jpg" alt="Frameless Glass Shower Area">
+              <span class="img-badge-overlay">Shower Area</span>
+            </div>
+            <div class="img-card">
+              <img src="images/vanity-quartz.jpg" alt="Floating Quartz Vanity">
+              <span class="img-badge-overlay">Floating Vanity</span>
+            </div>
+            <div class="img-card">
+              <img src="images/bathroom-main.jpg" alt="Precision Tiling Niche">
+              <span class="img-badge-overlay">Tiling Detail</span>
+            </div>
+          </div>
+
           <div class="product-details">
-            <span class="pill-tag pill-tag-verdigris">Product 02 · Bathrooms</span>
+            <span class="pill-tag pill-tag-verdigris">Category 03 · Fixed Packages</span>
             <h2 class="product-title">Bathroom Renovation</h2>
             <p class="product-desc">
-              Wet area overhaul delivered in 7-10 days. Guaranteed multi-layer waterproofing, precision tiling, concealed wall plumbing, shower glass, and custom floating vanities.
+              Wet area overhaul delivered in 7-10 days. Guaranteed multi-layer waterproofing, precision tiling, concealed wall plumbing, glass shower partitions, and custom floating vanities.
             </p>
 
             <div class="feature-tags-group">
@@ -250,7 +338,7 @@
               <span class="pill-tag pill-tag-subtle">Waterproofing</span>
               <span class="pill-tag pill-tag-subtle">Fixtures</span>
               <span class="pill-tag pill-tag-subtle">Shower Partition</span>
-              <span class="pill-tag pill-tag-subtle">Vanity</span>
+              <span class="pill-tag pill-tag-subtle">Floating Vanity</span>
             </div>
 
             <div class="dashed-divider"></div>
@@ -263,56 +351,60 @@
             <div class="dashed-divider"></div>
 
             <a href="bathroom-renovation.html" class="product-action-link verdigris-link">
-              See Bathroom product & specs →
+              See Bathroom Packages & Specs →
             </a>
-          </div>
-
-          <div class="product-collage">
-            <div class="img-card product-collage-featured">
-              <img src="images/shower-glass.jpg" alt="Frameless Glass Shower Area">
-              <span class="img-badge-overlay">Shower Area</span>
-            </div>
-            <div class="img-card">
-              <img src="images/vanity-quartz.jpg" alt="Floating Quartz Vanity">
-              <span class="img-badge-overlay">Vanity</span>
-            </div>
-            <div class="img-card">
-              <img src="images/bathroom-main.jpg" alt="Precision Tiling Niche">
-              <span class="img-badge-overlay">Tiling Detail</span>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROCESS STRIP -->
-    <section class="process-section">
+    <!-- STANDARDIZED 5-STEP PROCESS SECTION -->
+    <section class="process-section section-padding" style="background-color: var(--bg-soft);">
       <div class="container">
         <div class="section-header">
-          <div class="section-eyebrow">Product Pipeline</div>
-          <h2 class="section-title">Four steps. Zero mid-project surprises.</h2>
+          <div class="section-eyebrow">Standard Pipeline</div>
+          <h2 class="section-title">Our Standardized 5-Step Process</h2>
+          <p class="section-subtext" style="margin: 8px auto 0;">Used for every customer across all project scales for predictable execution.</p>
         </div>
 
-        <div class="process-grid">
+        <div class="process-grid-5">
           <div class="process-card">
             <div class="process-num">01</div>
-            <h3 class="process-card-title">Enquiry</h3>
-            <p class="process-card-desc">Tell us your space size, location in Bangalore, and scope expectations.</p>
+            <h3 class="process-card-title">Virtual Consultation</h3>
+            <p class="process-card-desc">Share your requirements and floor plan with our team over a call or video consultation.</p>
           </div>
+
           <div class="process-card">
             <div class="process-num">02</div>
-            <h3 class="process-card-title">Site Visit</h3>
-            <p class="process-card-desc">We measure exact dimensions and audit existing electrical and plumbing lines.</p>
+            <h3 class="process-card-title">Mood Board & Preliminary Quote</h3>
+            <p class="process-card-desc">We build a mood board and give you a preliminary quote based on your floor plan.</p>
           </div>
+
           <div class="process-card">
             <div class="process-num">03</div>
-            <h3 class="process-card-title">Fixed Quote</h3>
-            <p class="process-card-desc">Itemized specification in 3-5 days. Cost, materials, and timeline are fixed upfront.</p>
+            <h3 class="process-card-title">Design Token</h3>
+            <p class="process-card-desc">A token payment moves your project into detailed design, handled by our design partner team.</p>
           </div>
+
           <div class="process-card">
             <div class="process-num">04</div>
+            <h3 class="process-card-title">Design Phase</h3>
+            <p class="process-card-desc">Detailed design finalized with your feedback and approval.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">05</div>
             <h3 class="process-card-title">Execution</h3>
-            <p class="process-card-desc">A dedicated project manager drives on-site execution with daily progress logs.</p>
+            <p class="process-card-desc">Our team visits your site to kick off and manage execution end to end.</p>
+          </div>
+        </div>
+
+        <!-- CANONICAL DECISION LOGIC CALLOUT -->
+        <div class="process-callout-box">
+          <div class="callout-icon">💡</div>
+          <div class="callout-content">
+            <strong class="callout-title">Process & Site Visit Note:</strong>
+            <p class="callout-text">For standardized packages (Bathroom Renovation, Kitchen Package, Bedroom Package, Living Room Package), your quote is finalized remotely based on your floor plan — no site visit needed until execution. For fully customized or bespoke projects, we offer a free in-person site visit before you commit to the design token, to ensure accurate scope and pricing.</p>
           </div>
         </div>
       </div>
@@ -414,11 +506,12 @@
                   <input type="text" id="userLocation" class="form-input" value="Bangalore" placeholder="e.g. HSR Layout" required>
                 </div>
                 <div class="form-group" style="margin-bottom: 0;">
-                  <label for="serviceSelect" class="form-label">Service *</label>
+                  <label for="serviceSelect" class="form-label">Category / Service *</label>
                   <select id="serviceSelect" class="form-select" required>
-                    <option value="Interior Fit-Out">Interior Fit-Out</option>
-                    <option value="Bathroom Renovation">Bathroom Renovation</option>
-                    <option value="Both">Both</option>
+                    <option value="Complete Home Renovation">Complete Home Renovation (Bespoke)</option>
+                    <option value="Interior Fit-Out">Interiors & Room Packages (Fixed Tier)</option>
+                    <option value="Bathroom Renovation">Bathroom Renovation (Fixed Tier)</option>
+                    <option value="Multiple Categories">Multiple / Full Scope</option>
                   </select>
                 </div>
               </div>
@@ -430,7 +523,7 @@
                   <option value="₹1.25L - ₹3L">₹1.25L – ₹3L (Bathroom focus)</option>
                   <option value="₹3L - ₹8L">₹3L – ₹8L</option>
                   <option value="₹8L - ₹15L">₹8L – ₹15L (Interiors focus)</option>
-                  <option value="₹15L+">₹15L+ (Full Home Fit-Out)</option>
+                  <option value="₹15L+">₹15L+ (Complete Home Renovation)</option>
                 </select>
               </div>
 
@@ -440,7 +533,7 @@
               </div>
 
               <button type="submit" class="btn btn-dark btn-full" style="padding: 16px;">
-                Request a Site Visit
+                Request Consultation / Quote
               </button>
 
               <div id="formSuccessMsg" class="form-success-msg">
@@ -462,7 +555,7 @@
             Livona <span class="space-text">Space</span>
           </a>
           <div class="footer-copy">
-            © 2026 Livona Space. All rights reserved.
+            © 2026 Livona Space. All rights reserved. · <a href="privacy.html" style="color: var(--ink-soft); text-decoration: underline;">Privacy Policy</a>
           </div>
         </div>
 

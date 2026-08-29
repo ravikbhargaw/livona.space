@@ -42,8 +42,29 @@
         <nav aria-label="Main Navigation">
           <ul class="nav-menu">
             <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="interiors.html" class="nav-link">Interiors</a></li>
-            <li><a href="bathroom-renovation.html" class="nav-link">Bathroom Renovation</a></li>
+            <li class="nav-item-dropdown">
+              <a href="home-renovation.html" class="nav-link dropdown-toggle">Services ▾</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="home-renovation.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Complete Home Renovation</span>
+                    <span class="dropdown-item-desc">Full house, bespoke single-vendor</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="interiors.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Interiors & Room Packages</span>
+                    <span class="dropdown-item-desc">Kitchen, Bedroom & Living Room packages</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="bathroom-renovation.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Bathroom Renovation</span>
+                    <span class="dropdown-item-desc">7-10 day wet area overhaul</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li><a href="gallery.html" class="nav-link">Gallery</a></li>
             <li><a href="blog.html" class="nav-link">Blog</a></li>
             <li><a href="about.html" class="nav-link active-nav">About</a></li>
@@ -52,7 +73,7 @@
         </nav>
 
         <div class="header-actions">
-          <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" class="btn btn-dark">Book Meeting 📅</a>
+          <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20consultation." target="_blank" rel="noopener" class="btn btn-dark">Book Meeting 📅</a>
           <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -68,7 +89,8 @@
   <!-- Mobile Drawer -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" class="mobile-nav-link">Home</a>
-    <a href="interiors.html" class="mobile-nav-link">Interiors</a>
+    <a href="home-renovation.html" class="mobile-nav-link">Complete Home Renovation</a>
+    <a href="interiors.html" class="mobile-nav-link">Interiors & Room Packages</a>
     <a href="bathroom-renovation.html" class="mobile-nav-link">Bathroom Renovation</a>
     <a href="gallery.html" class="mobile-nav-link">Gallery</a>
     <a href="blog.html" class="mobile-nav-link">Blog</a>
@@ -119,54 +141,61 @@
 
           <div class="placeholder-box" style="padding: 32px; text-align: left; align-items: flex-start; background: var(--card-bg); border-color: var(--brass);">
             <span class="pill-tag pill-tag-brass">The Livona Space Way</span>
-            <h3 style="font-family: var(--font-display); font-size: 1.35rem; margin: 16px 0 8px;">Fixed-Scope Product Packages</h3>
+            <h3 style="font-family: var(--font-display); font-size: 1.35rem; margin: 16px 0 8px;">Standardized Product Packages & Bespoke Service</h3>
             <p style="color: var(--ink-soft); font-size: 0.9375rem; line-height: 1.6;">
-              Itemized tier pricing upfront, factory-grade CNC joinery, dedicated project managers with daily app updates, and legally binding handover guarantees.
+              Transparent tier pricing, factory-grade CNC joinery, dedicated project managers with daily updates, and legally binding handover guarantees.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- HOW WE WORK (EXPANDED 4-STEP PROCESS) -->
+    <!-- HOW WE WORK (STANDARDIZED 5-STEP PROCESS) -->
     <section class="process-section" style="background-color: var(--bg-soft);">
       <div class="container">
         <div class="section-header">
           <div class="section-eyebrow">How We Work</div>
-          <h2 class="section-title">Our 4-Stage Operational Model</h2>
+          <h2 class="section-title">Our Standardized 5-Step Process</h2>
         </div>
 
-        <div class="process-grid">
+        <div class="process-grid-5">
           <div class="process-card">
             <div class="process-num">01</div>
-            <h3 class="process-card-title">Enquiry</h3>
-            <p class="process-card-desc">
-              Tell us your space size, layout, and target product tier online. We evaluate structural feasibility and assign a dedicated project engineer within 2 hours.
-            </p>
+            <h3 class="process-card-title">Virtual Consultation</h3>
+            <p class="process-card-desc">Share your requirements and floor plan with our team over a call or video consultation.</p>
           </div>
 
           <div class="process-card">
             <div class="process-num">02</div>
-            <h3 class="process-card-title">Site Visit</h3>
-            <p class="process-card-desc">
-              Our site engineers visit your property in Bangalore with 3D laser scanners to measure exact wall plumb, floor levels, and plumbing line points.
-            </p>
+            <h3 class="process-card-title">Mood Board & Preliminary Quote</h3>
+            <p class="process-card-desc">We build a mood board and give you a preliminary quote based on your floor plan.</p>
           </div>
 
           <div class="process-card">
             <div class="process-num">03</div>
-            <h3 class="process-card-title">Fixed Quote</h3>
-            <p class="process-card-desc">
-              Receive a comprehensive 3D design render and a line-item bill of quantities within 3-5 days. Every material grade, cost, and delivery date is 100% locked.
-            </p>
+            <h3 class="process-card-title">Design Token</h3>
+            <p class="process-card-desc">A token payment moves your project into detailed design, handled by our design partner team.</p>
           </div>
 
           <div class="process-card">
             <div class="process-num">04</div>
+            <h3 class="process-card-title">Design Phase</h3>
+            <p class="process-card-desc">Detailed design finalized with your feedback and approval.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">05</div>
             <h3 class="process-card-title">Execution</h3>
-            <p class="process-card-desc">
-              Factory production runs off-site while our dedicated project manager manages site prep. Daily photo logs and quality audits ensure seamless handover.
-            </p>
+            <p class="process-card-desc">Our team visits your site to kick off and manage execution end to end.</p>
+          </div>
+        </div>
+
+        <!-- CANONICAL DECISION LOGIC CALLOUT -->
+        <div class="process-callout-box">
+          <div class="callout-icon">💡</div>
+          <div class="callout-content">
+            <strong class="callout-title">Process & Site Visit Note:</strong>
+            <p class="callout-text">For standardized packages (Bathroom Renovation, Kitchen Package, Bedroom Package, Living Room Package), your quote is finalized remotely based on your floor plan — no site visit needed until execution. For fully customized or bespoke projects, we offer a free in-person site visit before you commit to the design token, to ensure accurate scope and pricing.</p>
           </div>
         </div>
       </div>
@@ -224,7 +253,7 @@
             Livona <span class="space-text">Space</span>
           </a>
           <div class="footer-copy">
-            © 2026 Livona Space. All rights reserved.
+            © 2026 Livona Space. All rights reserved. · <a href="privacy.html" style="color: var(--ink-soft); text-decoration: underline;">Privacy Policy</a>
           </div>
         </div>
 

@@ -42,8 +42,29 @@
         <nav aria-label="Main Navigation">
           <ul class="nav-menu">
             <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="interiors.html" class="nav-link">Interiors</a></li>
-            <li><a href="bathroom-renovation.html" class="nav-link">Bathroom Renovation</a></li>
+            <li class="nav-item-dropdown">
+              <a href="gallery.html" class="nav-link dropdown-toggle">Services ▾</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="home-renovation.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Complete Home Renovation</span>
+                    <span class="dropdown-item-desc">Full house, bespoke single-vendor</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="interiors.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Interiors & Room Packages</span>
+                    <span class="dropdown-item-desc">Kitchen, Bedroom & Living Room packages</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="bathroom-renovation.html" class="dropdown-item">
+                    <span class="dropdown-item-title">Bathroom Renovation</span>
+                    <span class="dropdown-item-desc">7-10 day wet area overhaul</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li><a href="gallery.html" class="nav-link active-nav">Gallery</a></li>
             <li><a href="blog.html" class="nav-link">Blog</a></li>
             <li><a href="about.html" class="nav-link">About</a></li>
@@ -52,7 +73,7 @@
         </nav>
 
         <div class="header-actions">
-          <a href="https://wa.me/918317493619?text=Hi%20Livona%20Space!%20I%20would%20like%20to%20schedule%20a%20site%20visit%20%26%20measurement%20consultation." target="_blank" rel="noopener" class="btn btn-dark">Book Meeting 📅</a>
+          <a href="contact.html" class="btn btn-dark">Get a Quote</a>
           <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -68,7 +89,8 @@
   <!-- Mobile Drawer -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" class="mobile-nav-link">Home</a>
-    <a href="interiors.html" class="mobile-nav-link">Interiors</a>
+    <a href="home-renovation.html" class="mobile-nav-link">Complete Home Renovation</a>
+    <a href="interiors.html" class="mobile-nav-link">Interiors & Room Packages</a>
     <a href="bathroom-renovation.html" class="mobile-nav-link">Bathroom Renovation</a>
     <a href="gallery.html" class="mobile-nav-link active-nav">Gallery</a>
     <a href="blog.html" class="mobile-nav-link">Blog</a>
@@ -85,14 +107,15 @@
           Executed spaces across <span class="italic-brass">Bangalore</span>.
         </h1>
         <p class="hero-subtext" style="margin: 0 auto 24px;">
-          Filter by product line to view real living room fit-outs, modular kitchens, wardrobes, and luxury bathroom transformations.
+          Filter by category to view full home renovations, living room fit-outs, modular kitchens, wardrobes, and luxury bathroom transformations.
         </p>
 
         <!-- FILTER TABS -->
         <div class="gallery-filters">
           <button class="filter-btn active" data-filter="all">All Projects (16)</button>
-          <button class="filter-btn" data-filter="interiors">Product 01 · Interiors</button>
-          <button class="filter-btn" data-filter="bathroom">Product 02 · Bathrooms</button>
+          <button class="filter-btn" data-filter="home-renovation">Complete Home Renovation</button>
+          <button class="filter-btn" data-filter="interiors">Interiors & Room Packages</button>
+          <button class="filter-btn" data-filter="bathroom">Bathroom Renovation</button>
         </div>
       </div>
     </section>
@@ -102,9 +125,9 @@
         <!-- 16 PROMINENT LARGE TILES (2-3 PER ROW) -->
         <div class="gallery-grid">
           <!-- 1 (Featured 2x2) -->
-          <div class="gallery-item gallery-tile-2x2" data-category="interiors">
-            <img src="images/hero-living.jpg" alt="Living & Dining Room Fit-Out">
-            <div class="gallery-overlay-badge">Living & Dining Room · HSR Layout</div>
+          <div class="gallery-item gallery-tile-2x2" data-category="home-renovation">
+            <img src="images/hero-living.jpg" alt="Complete Home Renovation">
+            <div class="gallery-overlay-badge">Complete Home Renovation · HSR Layout</div>
           </div>
           <!-- 2 -->
           <div class="gallery-item" data-category="bathroom">
@@ -195,7 +218,7 @@
             Livona <span class="space-text">Space</span>
           </a>
           <div class="footer-copy">
-            © 2026 Livona Space. All rights reserved.
+            © 2026 Livona Space. All rights reserved. · <a href="privacy.html" style="color: var(--ink-soft); text-decoration: underline;">Privacy Policy</a>
           </div>
         </div>
 
