@@ -255,6 +255,15 @@ function initFormHandler() {
         successMsg.classList.add('show');
       }
 
+      // Honeypot Spam Protection Check
+      const honeypot = document.getElementById('website_url_hp')?.value;
+      if (honeypot && honeypot.trim() !== '') {
+        console.warn('Bot detected via honeypot field. Silently cancelling submission.');
+        if (successMsg) successMsg.classList.add('show');
+        quoteForm.reset();
+        return;
+      }
+
       // Send via FormData for max FormSubmit compatibility
       const fd = new FormData();
       fd.append('Name', name);
@@ -263,9 +272,10 @@ function initFormHandler() {
       fd.append('Service', service);
       fd.append('Budget', budget || 'Not specified');
       fd.append('Notes', notes || 'None');
+      fd.append('_honey', ''); // FormSubmit built-in honeypot
       fd.append('_subject', `New Livona Space Lead: ${name} (${service})`);
 
-      fetch('https://formsubmit.co/ajax/ravi.bhargaw@meaven.in', {
+      fetch('https://formsubmit.co/ajax/livona.space@gmail.com', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: fd
@@ -428,9 +438,10 @@ function initAiChatbot() {
       fd.append('Name', userLeadName);
       fd.append('Phone', userLeadPhone);
       fd.append('Source', 'AI Assistant Chatbot');
+      fd.append('_honey', ''); // FormSubmit built-in honeypot
       fd.append('_subject', `New AI Chatbot Lead: ${userLeadName} (${userLeadPhone})`);
 
-      fetch('https://formsubmit.co/ajax/ravi.bhargaw@meaven.in', {
+      fetch('https://formsubmit.co/ajax/livona.space@gmail.com', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: fd
@@ -521,7 +532,7 @@ function initAiChatbot() {
     } else {
       reply = `Livona Space delivers standardized room packages and full home bespoke renovations.<br><br>
       • Call/WhatsApp: <strong>+91 83174 93619</strong><br>
-      • Email: <strong>hey@livona.space</strong><br><br>
+      • Email: <strong>livona.space@gmail.com</strong><br><br>
       <a href="${waLink}" target="_blank" rel="noopener" style="color: var(--brass); font-weight:700;">👉 Request a Consultation via WhatsApp 💬</a>`;
     }
 
