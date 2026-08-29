@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Gallery — Livona Space Bangalore</title>
-  <meta name="description" content="Explore completed interior fit-outs and bathroom renovations by Livona Space across Bangalore.">
+  <title>Interior & Renovation Project Gallery | Livona Space</title>
+  <meta name="description" content="Explore photos of completed home renovations, modular kitchens, bedroom wardrobes, and boutique bathroom overhauls by Livona Space.">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,15 +19,37 @@
   <!-- Canonical & Social Meta Tags -->
   <link rel="canonical" href="https://livona.space/gallery.html">
   <meta property="og:site_name" content="Livona Space">
-  <meta property="og:title" content="Project Portfolio Gallery — Livona Space Bangalore">
-  <meta property="og:description" content="Browse 16+ completed home interior fit-outs and luxury bathroom transformations executed by Livona Space across Bangalore.">
+  <meta property="og:title" content="Interior & Renovation Project Gallery | Livona Space">
+  <meta property="og:description" content="Explore photos of completed home renovations, modular kitchens, bedroom wardrobes, and boutique bathroom overhauls by Livona Space.">
   <meta property="og:image" content="https://livona.space/images/gallery-portfolio.jpg">
   <meta property="og:url" content="https://livona.space/gallery.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Project Portfolio Gallery — Livona Space Bangalore">
-  <meta name="twitter:description" content="Browse 16+ completed home interior fit-outs and luxury bathroom transformations executed by Livona Space across Bangalore.">
+  <meta name="twitter:title" content="Interior & Renovation Project Gallery | Livona Space">
+  <meta name="twitter:description" content="Explore photos of completed home renovations, modular kitchens, bedroom wardrobes, and boutique bathroom overhauls by Livona Space.">
   <meta name="twitter:image" content="https://livona.space/images/gallery-portfolio.jpg">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "name": "Project Gallery",
+        "url": "https://livona.space/gallery.html",
+        "description": "Archive of delivered residential interior fit-outs, complete home renovations, and boutique bathroom transformations."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://livona.space/" },
+          { "@type": "ListItem", "position": 2, "name": "Project Gallery", "item": "https://livona.space/gallery.html" }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -35,9 +57,7 @@
   <header class="site-header">
     <div class="container">
       <div class="header-inner">
-        <a href="index.html" class="brand-logo" aria-label="Livona Space Homepage">
-          Livona <span class="space-text">Space</span>
-        </a>
+        <a href="index.html" class="brand-logo" aria-label="Livona Space Homepage"><img src="images/livona-logo.png" alt="Livona Space Logo" class="brand-logo-img"><span class="brand-logo-text">Livona <span class="space-text">Space</span></span></a>
 
         <nav aria-label="Main Navigation">
           <ul class="nav-menu">
@@ -102,107 +122,123 @@
   <main>
     <section class="page-hero">
       <div class="container" style="text-align: center;">
-        <span class="pill-tag pill-tag-outline">Portfolio Archive</span>
+        <span class="pill-tag pill-tag-outline">Renovation Concept Archive</span>
         <h1 class="hero-headline" style="margin: 16px 0;">
-          Executed spaces across <span class="italic-brass">Bangalore</span>.
+          Before & After <span class="italic-brass">Renovation Concepts</span>.
         </h1>
-        <p class="hero-subtext" style="margin: 0 auto 24px;">
-          Filter by category to view full home renovations, living room fit-outs, modular kitchens, wardrobes, and luxury bathroom transformations.
+        <p class="hero-subtext" style="margin: 0 auto 24px; max-width: 680px;">
+          The renovation visuals below are concept illustrations showing the kind of transformation we deliver — not photos of completed client projects.
         </p>
 
         <!-- FILTER TABS -->
         <div class="gallery-filters">
-          <button class="filter-btn active" data-filter="all">All Projects (16)</button>
+          <button class="filter-btn active" data-filter="all">All Concepts</button>
           <button class="filter-btn" data-filter="home-renovation">Complete Home Renovation</button>
-          <button class="filter-btn" data-filter="interiors">Interiors & Room Packages</button>
-          <button class="filter-btn" data-filter="bathroom">Bathroom Renovation</button>
+          <button class="filter-btn" data-filter="interiors">Kitchen & Room Packages</button>
+          <button class="filter-btn" data-filter="bathroom">Bathroom Overhauls</button>
         </div>
       </div>
     </section>
 
     <section class="gallery-section section-padding">
       <div class="container">
-        <!-- 16 PROMINENT LARGE TILES (2-3 PER ROW) -->
+        <!-- CONCEPT VISUALIZATION GALLERY — SWAP WITH REAL PROJECT PHOTOS WHEN AVAILABLE -->
         <div class="gallery-grid">
           <!-- 1 (Featured 2x2) -->
           <div class="gallery-item gallery-tile-2x2" data-category="home-renovation">
-            <img src="images/hero-living.jpg" alt="Complete Home Renovation">
-            <div class="gallery-overlay-badge">Complete Home Renovation · HSR Layout</div>
+            <img src="images/concept-after-home.png" alt="Concept Full Home Renovation Transformation">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Complete Home Renovation Concept</div>
           </div>
           <!-- 2 -->
           <div class="gallery-item" data-category="bathroom">
-            <img src="images/shower-glass.jpg" alt="Frameless Glass Shower Suite">
-            <div class="gallery-overlay-badge">Frameless Shower Suite · Indiranagar</div>
+            <img src="images/concept-after-bathroom.jpg" alt="Concept Bathroom Renovation Transformation">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Boutique Bathroom Concept</div>
           </div>
           <!-- 3 -->
           <div class="gallery-item" data-category="interiors">
-            <img src="images/kitchen-main.jpg" alt="Acrylic Modular Kitchen">
-            <div class="gallery-overlay-badge">Acrylic Kitchen · Sarjapur</div>
+            <img src="images/kitchen-main.jpg" alt="Concept Modular Kitchen Renovation">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Kitchen Renovation Concept</div>
           </div>
           <!-- 4 -->
           <div class="gallery-item" data-category="interiors">
-            <img src="images/wardrobe-main.jpg" alt="Custom Wardrobe">
-            <div class="gallery-overlay-badge">Glass Wardrobe · Koramangala</div>
+            <img src="images/wardrobe-main.jpg" alt="Concept Custom Wardrobe Renovation">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Glass Wardrobe Concept</div>
           </div>
           <!-- 5 -->
           <div class="gallery-item" data-category="bathroom">
-            <img src="images/vanity-quartz.jpg" alt="Floating Quartz Vanity">
-            <div class="gallery-overlay-badge">Floating Quartz Vanity · Whitefield</div>
+            <img src="images/vanity-quartz.jpg" alt="Concept Floating Quartz Vanity">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Floating Quartz Vanity Concept</div>
           </div>
           <!-- 6 -->
           <div class="gallery-item" data-category="interiors">
-            <img src="images/blog-guide.jpg" alt="Cove Ceiling">
-            <div class="gallery-overlay-badge">Cove Ceiling · Electronic City</div>
+            <img src="images/blog-guide.jpg" alt="Concept Cove Ceiling Renovation">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Cove Ceiling Concept</div>
           </div>
           <!-- 7 -->
           <div class="gallery-item" data-category="bathroom">
-            <img src="images/bathroom-main.jpg" alt="Concealed Rain Shower">
-            <div class="gallery-overlay-badge">Concealed Rain Shower · JP Nagar</div>
+            <img src="images/bathroom-main.jpg" alt="Concept Concealed Rain Shower">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Concealed Rain Shower Concept</div>
           </div>
           <!-- 8 -->
           <div class="gallery-item" data-category="interiors">
-            <img src="images/living-interior.jpg" alt="Foyer Partition">
-            <div class="gallery-overlay-badge">Foyer Partition · Bellandur</div>
+            <img src="images/living-interior.jpg" alt="Concept Foyer Partition">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Foyer Partition Concept</div>
           </div>
           <!-- 9 -->
           <div class="gallery-item" data-category="bathroom">
-            <img src="images/waterproofing.jpg" alt="Terrazzo Tile Feature">
-            <div class="gallery-overlay-badge">Terrazzo Tile Feature · Jayanagar</div>
+            <img src="images/waterproofing.jpg" alt="Concept Terrazzo Tile Feature">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Terrazzo Tile Feature Concept</div>
           </div>
           <!-- 10 -->
           <div class="gallery-item" data-category="interiors">
-            <img src="images/kitchen-detail.jpg" alt="PU Finish Kitchen">
-            <div class="gallery-overlay-badge">PU Finish Kitchen · Hebbal</div>
+            <img src="images/kitchen-detail.jpg" alt="Concept PU Finish Kitchen">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">PU Finish Kitchen Concept</div>
           </div>
           <!-- 11 -->
           <div class="gallery-item" data-category="bathroom">
-            <img src="images/bathroom-main.jpg" alt="Recessed Wall Niche">
-            <div class="gallery-overlay-badge">Recessed Wall Niche · Bannerghatta</div>
+            <img src="images/bathroom-main.jpg" alt="Concept Recessed Wall Niche">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Recessed Wall Niche Concept</div>
           </div>
           <!-- 12 -->
           <div class="gallery-item" data-category="interiors">
-            <img src="images/flooring-detail.jpg" alt="Study Niche Fit-Out">
-            <div class="gallery-overlay-badge">Study Niche Fit-Out · Yelahanka</div>
+            <img src="images/flooring-detail.jpg" alt="Concept Study Niche Fit-Out">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Study Niche Concept</div>
           </div>
           <!-- 13 -->
           <div class="gallery-item" data-category="bathroom">
-            <img src="images/shower-glass.jpg" alt="Freestanding Spa Tub">
-            <div class="gallery-overlay-badge">Freestanding Spa Tub · Sadashivnagar</div>
+            <img src="images/shower-glass.jpg" alt="Concept Freestanding Spa Suite">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Shower Suite Concept</div>
           </div>
           <!-- 14 -->
           <div class="gallery-item" data-category="interiors">
-            <img src="images/gallery-portfolio.jpg" alt="TV Unit & Wall Paneling">
-            <div class="gallery-overlay-badge">TV Unit & Wall Paneling · Marathahalli</div>
+            <img src="images/gallery-portfolio.jpg" alt="Concept TV Unit & Wall Paneling">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">TV Unit & Wall Paneling Concept</div>
           </div>
           <!-- 15 -->
-          <div class="gallery-item" data-category="interiors">
-            <img src="images/wardrobe-main.jpg" alt="Master Bedroom Storage">
-            <div class="gallery-overlay-badge">Master Bedroom Storage · Hennur</div>
+          <div class="gallery-item" data-category="bathroom">
+            <img src="images/after-bathroom.jpg" alt="Concept Microcement Bathroom">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Microcement Bathroom Concept</div>
           </div>
           <!-- 16 -->
-          <div class="gallery-item" data-category="bathroom">
-            <img src="images/vanity-quartz.jpg" alt="Matt Black Fixture Set">
-            <div class="gallery-overlay-badge">Matt Black Fixture Set · RT Nagar</div>
+          <div class="gallery-item" data-category="interiors">
+            <img src="images/paint-finish.jpg" alt="Concept Fluted Panel Feature">
+            <span class="concept-tag-badge">Concept Visualization</span>
+            <div class="gallery-overlay-badge">Fluted Panel Wall Concept</div>
           </div>
         </div>
       </div>
@@ -214,9 +250,7 @@
     <div class="container">
       <div class="footer-inner">
         <div>
-          <a href="index.html" class="brand-logo" style="margin-bottom: 8px;">
-            Livona <span class="space-text">Space</span>
-          </a>
+          <a href="index.html" class="brand-logo" aria-label="Livona Space Homepage" style="margin-bottom: 8px;"><img src="images/livona-logo.png" alt="Livona Space Logo" class="brand-logo-img"><span class="brand-logo-text">Livona <span class="space-text">Space</span></span></a>
           <div class="footer-copy">
             © 2026 Livona Space. All rights reserved. · <a href="privacy.html" style="color: var(--ink-soft); text-decoration: underline;">Privacy Policy</a>
           </div>
