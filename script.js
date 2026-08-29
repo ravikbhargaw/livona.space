@@ -3,12 +3,23 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initWordRevealHeadlines();
+  initHeroAnimations();
   initMobileMenu();
   highlightActiveNavLink();
   initFaqAccordions();
   initGalleryFilters();
   initFormHandler();
   initAiChatbot();
+  initScrollReveals();
+  initStatCounters();
+  initProcessProgressLine();
+  initStickyEngagementBar();
+  initStackedCards();
+  initBeforeAfterReveal();
+  initPinnedProcessStrip();
+  initParallaxEffects();
+  initPricingDealtAnimation();
 });
 
 /* --------------------------------------------------------------------------
@@ -79,13 +90,59 @@ function initFaqAccordions() {
 }
 
 /* --------------------------------------------------------------------------
-   4. GALLERY FILTER TABS
+   4. PRICING TAB SWITCHING (Index Page / SaaS view with Smooth Fade & Slide)
+   -------------------------------------------------------------------------- */
+function switchPricingTab(tabName) {
+  const tabInteriors = document.getElementById('tabInteriors');
+  const tabBathrooms = document.getElementById('tabBathrooms');
+  const gridInteriors = document.getElementById('gridInteriors');
+  const gridBathrooms = document.getElementById('gridBathrooms');
+
+  if (!tabInteriors || !tabBathrooms || !gridInteriors || !gridBathrooms) return;
+
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const currentGrid = gridInteriors.classList.contains('hidden') ? gridBathrooms : gridInteriors;
+  const targetGrid = tabName === 'interiors' ? gridInteriors : gridBathrooms;
+
+  if (currentGrid === targetGrid) return;
+
+  if (tabName === 'interiors') {
+    tabInteriors.classList.add('active-tab', 'active-tab-brass');
+    tabBathrooms.classList.remove('active-tab', 'active-tab-brass', 'active-tab-verdigris');
+  } else {
+    tabBathrooms.classList.add('active-tab', 'active-tab-verdigris');
+    tabInteriors.classList.remove('active-tab', 'active-tab-brass', 'active-tab-verdigris');
+  }
+
+  if (isReducedMotion) {
+    gridInteriors.classList.toggle('hidden', tabName !== 'interiors');
+    gridBathrooms.classList.toggle('hidden', tabName !== 'bathrooms');
+    return;
+  }
+
+  currentGrid.classList.add('tab-anim-out');
+  setTimeout(() => {
+    currentGrid.classList.add('hidden');
+    currentGrid.classList.remove('tab-anim-out');
+    targetGrid.classList.remove('hidden');
+    targetGrid.classList.add('tab-anim-out');
+    requestAnimationFrame(() => {
+      targetGrid.classList.remove('tab-anim-out');
+    });
+  }, 220);
+}
+
+/* --------------------------------------------------------------------------
+   5. GALLERY FILTER TABS WITH SMOOTH FADE & SCALE TRANSITIONS
    -------------------------------------------------------------------------- */
 function initGalleryFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-item[data-category]');
 
   if (!filterBtns.length || !galleryItems.length) return;
+
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -96,10 +153,23 @@ function initGalleryFilters() {
 
       galleryItems.forEach(item => {
         const itemCat = item.getAttribute('data-category');
-        if (filterValue === 'all' || itemCat === filterValue) {
+        const shouldShow = filterValue === 'all' || itemCat === filterValue;
+
+        if (isReducedMotion) {
+          item.classList.toggle('hidden', !shouldShow);
+          return;
+        }
+
+        if (shouldShow) {
           item.classList.remove('hidden');
+          item.classList.add('filter-anim-in');
+          setTimeout(() => item.classList.remove('filter-anim-in'), 350);
         } else {
-          item.classList.add('hidden');
+          item.classList.add('filter-anim-out');
+          setTimeout(() => {
+            item.classList.add('hidden');
+            item.classList.remove('filter-anim-out');
+          }, 220);
         }
       });
     });
@@ -271,6 +341,8 @@ function initAiChatbot() {
   const sendBtn = document.getElementById('aiSend');
 
   if (!launcher || !drawer || !closeBtn || !chatBody || !input || !sendBtn) return;
+
+  initChatbotIdlePulse();
 
   let leadState = 'NEEDS_NAME';
   let userLeadName = '';
@@ -457,4 +529,461 @@ function initAiChatbot() {
       appendMsg(reply, false);
     }, 400);
   }
+}
+
+/* --------------------------------------------------------------------------
+   7. HERO ENTRANCE STAGGER ANIMATIONS
+   -------------------------------------------------------------------------- */
+function initHeroAnimations() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const heroHeadline = document.querySelector('.hero-headline, .page-hero .hero-headline');
+  const heroSubtext = document.querySelector('.hero-subtext, .page-hero .hero-subtext');
+  const heroCtas = document.querySelector('.hero-cta-group, .page-hero-grid .hero-cta-group');
+  const heroImg = document.querySelector('.page-hero .img-card, .hero-visual, .page-hero-grid > div:last-child');
+
+  if (heroHeadline) heroHeadline.classList.add('hero-animate-1');
+  if (heroSubtext) heroSubtext.classList.add('hero-animate-2');
+  if (heroCtas) heroCtas.classList.add('hero-animate-3');
+  if (heroImg) heroImg.classList.add('hero-animate-4');
+}
+
+/* --------------------------------------------------------------------------
+   8. SCROLL-TRIGGERED REVEAL OBSERVER
+   -------------------------------------------------------------------------- */
+function initScrollReveals() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const selector = '.product-showcase-card, .pricing-card, .gallery-item, .process-card, .blog-card, .product-supporting-card, .trust-stat-item, .disambiguation-box, .process-callout-box';
+  const targets = document.querySelectorAll(selector);
+
+  const containers = document.querySelectorAll('.product-supporting-grid, .pricing-grid, .process-grid-5, .gallery-grid, .blog-grid, .trust-grid, .form-group-row');
+  containers.forEach(c => c.classList.add('reveal-stagger-container'));
+
+  targets.forEach(el => {
+    if (!el.classList.contains('reveal-on-scroll')) {
+      el.classList.add('reveal-on-scroll');
+    }
+  });
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+}
+
+/* --------------------------------------------------------------------------
+   9. ANIMATED COUNTERS FOR TRUST STATS
+   -------------------------------------------------------------------------- */
+function initStatCounters() {
+  const statNums = document.querySelectorAll('.trust-stat-num');
+  if (!statNums.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateSingleCounter(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  statNums.forEach(el => {
+    const rawText = el.innerText.trim();
+    const match = rawText.match(/^(\d+)(.*)$/);
+    if (match) {
+      el.setAttribute('data-count', match[1]);
+      el.setAttribute('data-suffix', match[2] || '');
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.innerText = '0' + (match[2] || '');
+      }
+      observer.observe(el);
+    }
+  });
+}
+
+function animateSingleCounter(el) {
+  const target = parseInt(el.getAttribute('data-count'), 10);
+  const suffix = el.getAttribute('data-suffix') || '';
+  if (isNaN(target)) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.innerText = target + suffix;
+    return;
+  }
+
+  const duration = 1800;
+  const startTime = performance.now();
+
+  function update(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easeProgress = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(easeProgress * target);
+
+    el.innerText = current + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.innerText = target + suffix;
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
+/* --------------------------------------------------------------------------
+   10. 5-STEP PROCESS ANIMATED SCROLL PROGRESSION LINE
+   -------------------------------------------------------------------------- */
+function initProcessProgressLine() {
+  const processGrid = document.querySelector('.process-grid-5');
+  const processSection = document.querySelector('.process-section');
+  if (!processGrid || !processSection) return;
+
+  if (!processGrid.querySelector('.process-progress-line-track')) {
+    const track = document.createElement('div');
+    track.className = 'process-progress-line-track';
+    track.innerHTML = '<div class="process-progress-line-bar"></div>';
+    processGrid.prepend(track);
+  }
+
+  const progressBar = processGrid.querySelector('.process-progress-line-bar');
+  if (!progressBar) return;
+
+  function updateProgress() {
+    const rect = processSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    const startPoint = windowHeight - 100;
+    const endPoint = windowHeight * 0.2;
+    const totalDist = startPoint - endPoint + rect.height;
+    const currentDist = startPoint - rect.top;
+    const progress = Math.min(Math.max(currentDist / totalDist, 0), 1);
+
+    progressBar.style.width = (progress * 100) + '%';
+  }
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateProgress);
+  }, { passive: true });
+  updateProgress();
+}
+
+/* --------------------------------------------------------------------------
+   11. STICKY / PERSISTENT ENGAGEMENT FLOATING BAR
+   -------------------------------------------------------------------------- */
+function initStickyEngagementBar() {
+  if (sessionStorage.getItem('sticky_dismissed') === 'true') return;
+
+  const bar = document.createElement('div');
+  bar.className = 'sticky-engagement-bar';
+  bar.id = 'stickyEngagementBar';
+  bar.innerHTML = `
+    <span class="sticky-engagement-text">💡 Planning a home or room renovation?</span>
+    <a href="contact.html" class="sticky-engagement-btn">Get Free Quote →</a>
+    <button class="sticky-engagement-close" id="closeStickyBar" aria-label="Dismiss sticky notification">&times;</button>
+  `;
+  document.body.appendChild(bar);
+
+  const closeBtn = document.getElementById('closeStickyBar');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      bar.classList.remove('is-visible');
+      sessionStorage.setItem('sticky_dismissed', 'true');
+    });
+  }
+
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        if (sessionStorage.getItem('sticky_dismissed') !== 'true') {
+          if (window.scrollY > 380) {
+            bar.classList.add('is-visible');
+          } else {
+            bar.classList.remove('is-visible');
+          }
+        }
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   12. CHATBOT IDLE PULSE
+   -------------------------------------------------------------------------- */
+function initChatbotIdlePulse() {
+  const launcher = document.getElementById('aiLauncher');
+  if (!launcher) return;
+
+  if (!sessionStorage.getItem('ai_interacted') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    launcher.classList.add('idle-pulse');
+  }
+
+  launcher.addEventListener('click', () => {
+    launcher.classList.remove('idle-pulse');
+    sessionStorage.setItem('ai_interacted', 'true');
+  });
+}
+
+/* --------------------------------------------------------------------------
+   13. STACKED CATEGORY CARDS (HOMEPAGE DECK EFFECT)
+   -------------------------------------------------------------------------- */
+function initStackedCards() {
+  const cards = document.querySelectorAll('.stacked-card-item');
+  if (!cards.length) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function updateCardStack() {
+    const windowHeight = window.innerHeight;
+
+    cards.forEach((card, index) => {
+      if (index === cards.length - 1) return;
+
+      const nextCard = cards[index + 1];
+      const nextRect = nextCard.getBoundingClientRect();
+
+      if (nextRect.top < windowHeight && nextRect.top > 100) {
+        const overlapProgress = 1 - ((nextRect.top - 100) / (windowHeight - 100));
+        const scale = 1 - (overlapProgress * 0.06);
+        const translateY = overlapProgress * -10;
+        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+        card.style.opacity = `${1 - (overlapProgress * 0.15)}`;
+      } else if (nextRect.top <= 100) {
+        card.style.transform = 'scale(0.94) translateY(-10px)';
+        card.style.opacity = '0.85';
+      } else {
+        card.style.transform = 'scale(1) translateY(0)';
+        card.style.opacity = '1';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCardStack);
+  }, { passive: true });
+
+  updateCardStack();
+}
+
+/* --------------------------------------------------------------------------
+   14. SCROLL-DRIVEN BEFORE/AFTER REVEAL
+   -------------------------------------------------------------------------- */
+function initBeforeAfterReveal() {
+  const section = document.getElementById('beforeAfterSection');
+  const afterLayer = document.getElementById('afterLayer');
+  const handle = document.getElementById('revealHandle');
+
+  if (!section || !afterLayer || !handle) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    afterLayer.style.clipPath = 'inset(0 0 0 0%)';
+    handle.style.left = '100%';
+    return;
+  }
+
+  function onScroll() {
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const scrollDistance = rect.height - windowHeight;
+
+    if (scrollDistance <= 0) return;
+
+    const currentPos = -rect.top;
+    const progress = Math.min(Math.max(currentPos / scrollDistance, 0), 1);
+
+    const revealPercent = (1 - progress) * 100;
+
+    afterLayer.style.clipPath = `inset(0 0 0 ${revealPercent}%)`;
+    handle.style.left = `${progress * 100}%`;
+  }
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(onScroll);
+  }, { passive: true });
+
+  onScroll();
+}
+
+/* --------------------------------------------------------------------------
+   15. PINNED PROCESS STRIP & SEQUENTIAL LIGHT-UP
+   -------------------------------------------------------------------------- */
+function initPinnedProcessStrip() {
+  const processSection = document.querySelector('.process-section');
+  const processGrid = document.querySelector('.process-grid-5');
+  const stepCards = document.querySelectorAll('.process-card');
+  const progressBar = document.querySelector('.process-progress-line-bar');
+
+  if (!processSection || !processGrid || !stepCards.length) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    stepCards.forEach(card => card.classList.add('active-step-lit'));
+    if (progressBar) progressBar.style.width = '100%';
+    return;
+  }
+
+  function updateProcessScroll() {
+    const rect = processSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    const startPoint = windowHeight - 150;
+    const totalDist = rect.height - 180;
+    if (totalDist <= 0) return;
+
+    const currentDist = startPoint - rect.top;
+    const progress = Math.min(Math.max(currentDist / totalDist, 0), 1);
+
+    if (progressBar) {
+      progressBar.style.width = `${progress * 100}%`;
+    }
+
+    const activeIndex = Math.min(Math.floor(progress * 5), 4);
+
+    stepCards.forEach((card, idx) => {
+      if (idx <= activeIndex && progress > 0.05) {
+        card.classList.add('active-step-lit');
+      } else {
+        card.classList.remove('active-step-lit');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateProcessScroll);
+  }, { passive: true });
+
+  updateProcessScroll();
+}
+
+/* --------------------------------------------------------------------------
+   16. PARALLAX HERO & CROSSING PARALLAX SECTIONS
+   -------------------------------------------------------------------------- */
+function initParallaxEffects() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const heroVisual = document.querySelector('.hero-visual-card, .page-hero-grid .img-card');
+  const alternatingRows = document.querySelectorAll('.feature-subrow, .product-grid');
+
+  function updateParallax() {
+    const scrollY = window.scrollY;
+
+    if (heroVisual && scrollY < 900) {
+      heroVisual.style.transform = `translateY(${scrollY * 0.14}px)`;
+    }
+
+    alternatingRows.forEach(row => {
+      const rect = row.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (rect.top < windowHeight && rect.bottom > 0) {
+        const offset = (rect.top - (windowHeight / 2)) * 0.06;
+        const imgCol = row.querySelector('.img-card, .product-collage');
+        const textCol = row.querySelector('.product-details, div:not(.img-card)');
+
+        if (imgCol) imgCol.style.transform = `translateY(${offset}px)`;
+        if (textCol) textCol.style.transform = `translateY(${-offset * 0.5}px)`;
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateParallax);
+  }, { passive: true });
+
+  updateParallax();
+}
+
+/* --------------------------------------------------------------------------
+   17. PRICING CARDS "DEALT" ANIMATION
+   -------------------------------------------------------------------------- */
+function initPricingDealtAnimation() {
+  const pricingGrids = document.querySelectorAll('.pricing-grid');
+  if (!pricingGrids.length) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const cards = entry.target.querySelectorAll('.pricing-card');
+        cards.forEach((card, idx) => {
+          card.classList.add('dealt-active');
+          card.style.transitionDelay = `${idx * 150}ms`;
+        });
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  pricingGrids.forEach(grid => {
+    const cards = grid.querySelectorAll('.pricing-card');
+    cards.forEach((card, idx) => {
+      card.classList.add('dealt-card');
+      if (idx === 0) card.classList.add('dealt-left');
+      if (idx === 1) card.classList.add('dealt-center');
+      if (idx === 2) card.classList.add('dealt-right');
+    });
+    observer.observe(grid);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   18. WORD-REVEAL HERO HEADLINE (SAFE DOM TEXT NODE TRAVERSAL)
+   -------------------------------------------------------------------------- */
+function initWordRevealHeadlines() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const headlines = document.querySelectorAll('.hero-headline');
+  headlines.forEach(headline => {
+    if (headline.querySelector('.word-span')) return;
+
+    let globalWordIdx = 0;
+
+    function wrapNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent;
+        if (!text.trim()) return;
+
+        const fragment = document.createDocumentFragment();
+        const words = text.split(/(\s+)/);
+
+        words.forEach(w => {
+          if (/\s+/.test(w) || w === '') {
+            fragment.appendChild(document.createTextNode(w));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'word-span';
+            span.style.animationDelay = `${globalWordIdx * 50}ms`;
+            span.textContent = w;
+            fragment.appendChild(span);
+            globalWordIdx++;
+          }
+        });
+
+        if (node.parentNode) {
+          node.parentNode.replaceChild(fragment, node);
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        Array.from(node.childNodes).forEach(wrapNode);
+      }
+    }
+
+    Array.from(headline.childNodes).forEach(wrapNode);
+  });
 }
