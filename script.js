@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initStackedCards();
   initBeforeAfterReveal();
   initPinnedProcessStrip();
+  initProcessAccordion();
   initParallaxEffects();
   initPricingDealtAnimation();
 });
@@ -998,3 +999,41 @@ function initWordRevealHeadlines() {
     Array.from(headline.childNodes).forEach(wrapNode);
   });
 }
+
+/* --------------------------------------------------------------------------
+   19. PROCESS CARD ACCORDION EXPAND/COLLAPSE
+   -------------------------------------------------------------------------- */
+function initProcessAccordion() {
+  const processCards = document.querySelectorAll('.process-card');
+  if (!processCards.length) return;
+
+  processCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const isAlreadyExpanded = card.classList.contains('is-expanded');
+      const parentGrid = card.closest('.process-grid-5');
+      
+      if (parentGrid) {
+        parentGrid.querySelectorAll('.process-card').forEach(otherCard => {
+          otherCard.classList.remove('is-expanded');
+          otherCard.setAttribute('aria-expanded', 'false');
+        });
+      } else {
+        card.classList.remove('is-expanded');
+        card.setAttribute('aria-expanded', 'false');
+      }
+
+      if (!isAlreadyExpanded) {
+        card.classList.add('is-expanded');
+        card.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+}
+

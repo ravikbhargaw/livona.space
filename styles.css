@@ -845,8 +845,23 @@ img {
    7. PROCESS STRIP
    -------------------------------------------------------------------------- */
 .process-section {
-  background-color: var(--bg-concrete);
-  padding: 80px 0;
+  background: linear-gradient(180deg, var(--bg-soft) 0%, #FAF8F5 100%);
+  border-top: 1px solid rgba(169, 130, 44, 0.15);
+  border-bottom: 1px solid rgba(169, 130, 44, 0.15);
+  padding: 88px 0;
+  position: relative;
+}
+
+.process-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 3px;
+  background: var(--brass);
+  border-radius: 0 0 4px 4px;
 }
 
 .process-grid {
@@ -1004,37 +1019,130 @@ img {
   background-color: var(--card-bg);
   border: 1px solid rgba(36, 33, 29, 0.12);
   border-radius: var(--radius-md);
-  padding: 32px 24px;
+  padding: 28px 20px;
   position: relative;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .process-card:hover {
   transform: translateY(-3px);
   border-color: var(--brass);
+  box-shadow: 0 6px 16px rgba(36, 33, 29, 0.06);
+}
+
+.process-card.is-expanded {
+  border-color: var(--brass);
+  box-shadow: 0 8px 24px rgba(169, 130, 44, 0.12);
+  background-color: #FFFFFF;
+}
+
+.process-card-header {
+  width: 100%;
+}
+
+.process-num-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .process-num {
   font-family: var(--font-mono);
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--brass);
   line-height: 1;
-  margin-bottom: 20px;
   opacity: 0.9;
+}
+
+.process-card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  border: 1px solid rgba(169, 130, 44, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brass);
+  transition: transform 0.35s ease, background-color 0.35s ease, color 0.35s ease;
+  flex-shrink: 0;
+}
+
+.process-card.is-expanded .process-card-icon {
+  transform: rotate(180deg);
+  background: var(--brass);
+  color: #FFFFFF;
 }
 
 .process-card-title {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  line-height: 1.35;
+  color: var(--ink);
 }
 
 .process-card-desc {
-  font-size: 0.9375rem;
+  font-size: 0.90625rem;
   color: var(--ink-soft);
-  line-height: 1.55;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.process-card-detail {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 1px solid transparent;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-top 0.35s ease, padding-top 0.35s ease, border-color 0.35s ease;
+}
+
+.process-card.is-expanded .process-card-detail {
+  max-height: 400px;
+  opacity: 1;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top-color: rgba(36, 33, 29, 0.1);
+}
+
+.process-detail-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.process-detail-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.84375rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+.process-detail-list li:last-child {
+  margin-bottom: 0;
+}
+
+.process-detail-list li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  top: -1px;
+  color: var(--brass);
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 /* --------------------------------------------------------------------------
